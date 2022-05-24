@@ -17,7 +17,7 @@ app.use(express.json());
 
 //routers
 app.use("/api/v1/admin-auth", adminAuthRoutes);
-app.use("/api/v1/jobs", authenticateUser, jobsRouter);
+// app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 
 // middleware
 app.use(adminErrorHandlerMiddleware);
