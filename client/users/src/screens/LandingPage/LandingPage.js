@@ -20,10 +20,29 @@ const LandingPage = ({ history }) => {
         <Row>
           <div className="intro-text">
             <div>
-              <h6 className="title">Welcome to To-Do List Application</h6>
-              <p className="subtitle">Save all your tasks</p>
+              <h6 className="title">Welcome to Research Project Management Tool</h6>
+              {/* <p className="subtitle">Save all your tasks</p> */}
             </div>
-          
+            <div className="buttonContainer">
+              <a href="/login">
+                <Button
+                  size="medium"
+                  variant="outline-primary"
+                  className="btn btn-outline-primary"
+                >
+                  Login
+                </Button>
+              </a>
+              <a href="/register">
+                <Button
+                  variant="outline-primary"
+                  size="medium"
+                  className="btn btn-outline-primary"
+                >
+                  Signup
+                </Button>
+              </a>
+            </div>
           </div>
         </Row>
       </Container>
