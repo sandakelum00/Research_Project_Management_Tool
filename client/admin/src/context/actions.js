@@ -12,3 +12,6 @@ export const UPDATE_ADMIN_ERROR = "UPDATE_ADMIN_ERROR";
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
 
 export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
+
+export const HANDLE_CHANGE = "HANDLE_CHANGE";
+export const CLEAR_VALUES = "CLEAR_VALUES";

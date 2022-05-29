@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 
 const DocSchema = new mongoose.Schema(
   {
+    file: {
+      type: String,
+      required: [true, "Please provide document"],
+      minlength: 1,
+      maxlength: 200,
+      trim: true,
+    },
+
     docTitle: {
       type: String,
       required: [true, "Please provide title"],
@@ -20,8 +28,8 @@ const DocSchema = new mongoose.Schema(
 
     docType: {
       type: String,
-      enum: ["presentation template", "marking scheme"],
-      default: "pending",
+      enum: ["presentation-template", "marking-scheme"],
+      default: "presentation-template",
     },
 
     createdBy: {

@@ -1,6 +1,7 @@
 import React from "react";
 import { IoBarChartSharp } from "react-icons/io5";
 import { MdQueryStats } from "react-icons/md";
+import { IoDocumentAttachOutline } from "react-icons/io5";
 import { FaWpforms } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 
@@ -11,12 +12,12 @@ const links = [
     path: "/",
     icon: <IoBarChartSharp />,
   },
-  // {
-  //   id: 2,
-  //   text: "all jobs",
-  //   path: "all-jobs",
-  //   icon: <MdQueryStats />,
-  // },
+  {
+    id: 2,
+    text: "add document",
+    path: "add-doc",
+    icon: <IoDocumentAttachOutline />,
+  },
   // {
   //   id: 3,
   //   text: "add job",

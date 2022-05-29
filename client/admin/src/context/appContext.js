@@ -13,6 +13,8 @@ import {
   UPDATE_ADMIN_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_ADMIN,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -26,6 +28,14 @@ const initialState = {
   admin: admin ? JSON.parse(admin) : null,
   token: token,
   showSidebar: false,
+  documents: [],
+  isEditing: false,
+  editDocId: "",
+  file: "",
+  docTitle: "",
+  docDescription: "",
+  docTypeOptions: ["presentation-template", "marking-scheme"],
+  docType: "presentation-template",
 };
 
 const AppContext = React.createContext();
@@ -144,6 +154,16 @@ const AppProvider = ({ children }) => {
     removeAdminFromLocalStorage();
   };
 
+  //handel change function
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
+  //clear value function
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -153,6 +173,8 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutAdmin,
         updateAdmin,
+        handleChange,
+        clearValues,
       }}
     >
       {children}
