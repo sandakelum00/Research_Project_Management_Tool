@@ -18,7 +18,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -29,8 +29,18 @@ module.exports = {
         },
       },
       {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ["@svgr/webpack"],
+      },
+      {
         test: /\.s?css$/,
         use: ["style-loader", "css-loader"],
+      },
+
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        loader: "file-loader",
       },
     ],
   },

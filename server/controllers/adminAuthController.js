@@ -63,7 +63,7 @@ const login = async (req, res, next) => {
   }
 };
 
-const updateUser = async (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const { email, name, lastName } = req.body;
 
@@ -87,4 +87,4 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, updateUser };
+module.exports = { register, login, update };

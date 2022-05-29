@@ -4,13 +4,13 @@ const router = express.Router();
 const {
   register,
   login,
-  updateUser,
+  update,
 } = require("../controllers/adminAuthController.js");
 
 const authenticateAdmin = require("../middleware/adminAuth.js");
 
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/updateUser").patch(authenticateAdmin, updateUser);
+router.route("/update").put(authenticateAdmin, update);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const connectDataBase = require("./config/database.js");
 
 //import routers
@@ -15,6 +16,7 @@ const app = express();
 dotenv.config();
 connectDataBase();
 app.use(express.json());
+app.use(cors());
 
 //routers
 app.use("/api/v1/admin-auth", adminAuthRoutes);
