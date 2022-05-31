@@ -12,6 +12,9 @@ import {
   UPDATE_ADMIN_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  ADD_DOCUMENT_BEGIN,
+  ADD_DOCUMENT_SUCCESS,
+  ADD_DOCUMENT_ERROR,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -129,6 +132,29 @@ const reducer = (state, action) => {
     return {
       ...state,
       ...initialState,
+    };
+  }
+
+  if (action.type === ADD_DOCUMENT_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  if (action.type === ADD_DOCUMENT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "New Document Created!",
+    };
+  }
+  if (action.type === ADD_DOCUMENT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
     };
   }
 

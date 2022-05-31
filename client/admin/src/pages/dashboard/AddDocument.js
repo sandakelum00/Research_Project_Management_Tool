@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { FormRow, FormRowSelect, Alert } from "../../components";
 import { useAppContext } from "../../context/appContext";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
+import Dropzone from "react-dropzone";
 
 const AddDocument = () => {
   const {
@@ -9,16 +10,44 @@ const AddDocument = () => {
     isEditing,
     showAlert,
     displayAlert,
-    file,
     docTitle,
     docDescription,
     docType,
     docTypeOptions,
     handleChange,
     clearValues,
-    createJob,
+    addDocument,
     editJob,
   } = useAppContext();
+
+  const dropRef = useRef();
+
+  const [file, setFile] = useState(null);
+
+  const handleDocInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    handleChange({ name, value });
+  };
+
+  const onDrop = (files) => {
+    const [uploadedFile] = files;
+    setFile(uploadedFile);
+
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(uploadedFile);
+
+    dropRef.current.style.border = "2px dashed #e9ebeb";
+  };
+
+  const updateBorder = (dragState) => {
+    if (dragState === "over") {
+      dropRef.current.style.border = "2px solid #000";
+    } else if (dragState === "leave") {
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,18 +56,18 @@ const AddDocument = () => {
       displayAlert();
       return;
     }
-    if (isEditing) {
-      // editJob();
-      return;
-    }
-    // createJob();
-    console.log("create doc");
-  };
+    // if (isEditing) {
+    //   editJob();
+    //   return;
+    // }
 
-  const handleDocInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    handleChange({ name, value });
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("docTitle", docTitle);
+    formData.append("docType", docType);
+    formData.append("docDescription", docDescription);
+
+    addDocument(formData);
   };
 
   return (
@@ -47,14 +76,6 @@ const AddDocument = () => {
         <h3>{isEditing ? "edit document" : "add document"}</h3>
         {showAlert && <Alert />}
         <div className="form-center">
-          {/* file */}
-          <FormRow
-            type="file"
-            name="file"
-            labelText="select file"
-            value={file}
-            handleChange={handleDocInput}
-          />
           {/* docTitle */}
           <FormRow
             type="text"
@@ -81,6 +102,29 @@ const AddDocument = () => {
             value={docDescription}
             handleChange={handleDocInput}
           />
+
+          <div className="upload-section">
+            <Dropzone
+              onDrop={onDrop}
+              onDragEnter={() => updateBorder("over")}
+              onDragLeave={() => updateBorder("leave")}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <div
+                  {...getRootProps({ className: "drop-zone" })}
+                  ref={dropRef}
+                >
+                  <input {...getInputProps()} />
+                  <p>Drag and drop a file OR click here to select a file</p>
+                  {file && (
+                    <div>
+                      <strong>Selected file:</strong> {file.name}
+                    </div>
+                  )}
+                </div>
+              )}
+            </Dropzone>
+          </div>
 
           {/* btn container */}
           <div className="btn-container">

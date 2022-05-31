@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const DocSchema = new mongoose.Schema(
   {
-    file: {
+    fileName: {
       type: String,
       required: [true, "Please provide document"],
       minlength: 1,
@@ -30,6 +30,21 @@ const DocSchema = new mongoose.Schema(
       type: String,
       enum: ["presentation-template", "marking-scheme"],
       default: "presentation-template",
+    },
+
+    file_path: {
+      type: String,
+      required: true,
+    },
+
+    file_mimetype: {
+      type: String,
+      required: true,
+    },
+
+    file_size: {
+      type: String,
+      required: true,
     },
 
     createdBy: {

@@ -15,6 +15,9 @@ import {
   LOGOUT_ADMIN,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  ADD_DOCUMENT_BEGIN,
+  ADD_DOCUMENT_SUCCESS,
+  ADD_DOCUMENT_ERROR,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -143,6 +146,35 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  //add document
+  const addDocument = async (formData) => {
+    dispatch({ type: ADD_DOCUMENT_BEGIN });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/docs",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log(response);
+      dispatch({ type: ADD_DOCUMENT_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: ADD_DOCUMENT_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   //
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
@@ -175,6 +207,7 @@ const AppProvider = ({ children }) => {
         updateAdmin,
         handleChange,
         clearValues,
+        addDocument,
       }}
     >
       {children}

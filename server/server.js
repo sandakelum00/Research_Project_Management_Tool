@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
+const bodyParser = require("body-parser");
 const connectDataBase = require("./config/database.js");
 
 //import routers
@@ -17,6 +19,9 @@ dotenv.config();
 connectDataBase();
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //routers
 app.use("/api/v1/admin-auth", adminAuthRoutes);

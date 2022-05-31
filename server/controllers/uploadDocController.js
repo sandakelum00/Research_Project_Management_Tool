@@ -1,5 +1,6 @@
 const UploadDoc = require("../models/UploadDocument.js");
 const { BadRequestError, NotFoundError } = require("../errors/index.js");
+const path = require("path");
 
 const uploadDocument = async (req, res, next) => {
   try {
@@ -10,8 +11,18 @@ const uploadDocument = async (req, res, next) => {
       next(err);
     }
 
-    req.body.createdBy = req.admin.adminId;
-    const doc = await UploadDoc.create(req.body);
+    const file = new UploadDoc({
+      docTitle,
+      docDescription,
+      docType,
+      fileName: req.file.originalname,
+      file_path: req.file.path,
+      file_mimetype: req.file.mimetype,
+      file_size: fileSizeFormatter(req.file.size, 2),
+      createdBy: req.admin.adminId,
+    });
+
+    const doc = await file.save();
 
     res.status(201).json({ doc });
   } catch (error) {
@@ -122,6 +133,19 @@ const deleteDoc = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+//file formatter
+const fileSizeFormatter = (bytes, decimal) => {
+  if (bytes === 0) {
+    return "0 Bytes";
+  }
+  const dm = decimal || 2;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "YB", "ZB"];
+  const index = Math.floor(Math.log(bytes) / Math.log(1000));
+  return (
+    parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
+  );
 };
 
 module.exports = { uploadDocument, getAllDoc, updateDoc, deleteDoc };
