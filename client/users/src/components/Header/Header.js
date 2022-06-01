@@ -19,19 +19,20 @@ const Header = () => {
   };
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
+    <Navbar >
       <Container>
-        <Nav className="ml-left">
-          <Navbar.Brand>
-            <Link to="/">Project Management Tool</Link>
-          </Navbar.Brand>
-        </Nav>
+        <p>
+          <a href="/">
+            {" "}
+            <img src="/images/logo.png" href="/" alt="logo" />{" "}
+          </a>
+        </p>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {userInfo ? (
             <Nav className="ml-auto">
-              <Nav.Link href="/mytasks">My tasks</Nav.Link>
-              <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+              <Nav.Link href="/homeStudent">My tasks</Nav.Link>
+              <NavDropdown title={userInfo?.fullName} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/" onClick={logoutHandler}>
@@ -40,9 +41,11 @@ const Header = () => {
               </NavDropdown>
             </Nav>
           ) : (
-            <Nav  className="ml-auto">
+            <Nav className="ml-auto">
               {" "}
-              <Nav.Link style={{marginLeft:"1000px"}} href="/login">Login</Nav.Link>
+              <Nav.Link style={{ marginLeft: "1000px" }} href="/loginStudent">
+                Login
+              </Nav.Link>
             </Nav>
           )}
         </Navbar.Collapse>

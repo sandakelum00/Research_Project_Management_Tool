@@ -13,7 +13,7 @@ export const studentRegisterReducer = (state = {}, action) => {
     case STUDENT_REGISTER_REQUEST:
       return { loading: true };
     case STUDENT_REGISTER_SUCCESS:
-      return { loading: false, STUDENTInfo: action.payload, success: true };
+      return { loading: false, userInfo: action.payload, success: true };
     case STUDENT_REGISTER_FAIL:
       return { loading: false, error: action.payload, success: false };
     default:
@@ -26,7 +26,7 @@ export const studentLoginReducer = (state = {}, action) => {
     case STUDENT_LOGIN_REQUEST:
       return { loading: true };
     case STUDENT_LOGIN_SUCCESS:
-      return { loading: true, studentInfo: action.payload };
+      return { loading: true, userInfo: action.payload };
     case STUDENT_LOGIN_FAIL:
       return { loading: false, error: action.payload };
     case STUDENT_LOGOUT:

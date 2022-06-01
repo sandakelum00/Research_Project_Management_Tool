@@ -1,4 +1,3 @@
-
 import React from "react"; 
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
@@ -23,17 +22,24 @@ const LoginStudent = () => {
   
     useEffect(() => {
       if (userInfo) {
-        history("/");
+        history("/homeStudent");
       }
     }, [history, userInfo]);
   
     const submitHandler = async (e) => {
       e.preventDefault();
+
+      // if(userInfo){
+
+      //   window.location.assign("/homeStudent");
+  
+      // }
   
       dispatch(login(studentId, password));
     };
 
     return (
+      <div>
         <MainScreen title="LOGIN">
           <div className="container">
             {error && <ErrorMessage variant="danger"> {error}</ErrorMessage>}
@@ -71,7 +77,7 @@ const LoginStudent = () => {
               <Row className="py-3">
                 <Col>
                   New User ?{" "}
-                  <Link className="hlink" to="/register">
+                  <Link className="hlink" to="/registerStudent">
                     Register Here
                   </Link>
                 </Col>
@@ -85,6 +91,7 @@ const LoginStudent = () => {
             </Form>
           </div>
         </MainScreen>
+        </div>
       );
     };
     

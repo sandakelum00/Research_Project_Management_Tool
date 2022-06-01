@@ -13,7 +13,7 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   : null;
 
 const initialState = {
-  studentRegister: { userInfo: userInfoFromStorage },
+  studentLogin: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];

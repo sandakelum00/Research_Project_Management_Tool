@@ -30,7 +30,7 @@ export const register =
 
       dispatch({ type: STUDENT_LOGIN_SUCCESS, payload: data });
 
-      localStorage.setItem("studentInfo", JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: STUDENT_REGISTER_FAIL,
@@ -60,7 +60,7 @@ export const register =
   
       dispatch({ type: STUDENT_LOGIN_SUCCESS, payload: data });
   
-      localStorage.setItem("studentInfo", JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: STUDENT_LOGIN_FAIL,
@@ -73,7 +73,7 @@ export const register =
   };
 
   export const logout = () => async (dispatch) => {
-    localStorage.removeItem("studentInfo");
+    localStorage.removeItem("userInfo");
     dispatch({ type: STUDENT_LOGOUT });
   };
   

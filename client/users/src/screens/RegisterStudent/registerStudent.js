@@ -6,6 +6,7 @@ import { register } from "../../actions/studentAction";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
 import MainScreen from "../../components/MainScreen"
+import "./registerStudent.css"
 
 const RegisterStudent = () => {
     const history = useNavigate();
@@ -24,7 +25,7 @@ const RegisterStudent = () => {
 
     useEffect(() => {
         if (userInfo) {
-          history("/");
+          history("/loginStudent");
         }
       }, [history, userInfo]);
   

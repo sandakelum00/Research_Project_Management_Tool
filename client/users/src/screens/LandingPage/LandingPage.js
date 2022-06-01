@@ -10,7 +10,7 @@ const LandingPage = ({ history }) => {
     const userInfo = localStorage.getItem("userInfo");
 
     if (userInfo) {
-      navigate("./mytasks");
+      navigate("./homeStudent");
     }
   }, [history]);
 
@@ -24,7 +24,7 @@ const LandingPage = ({ history }) => {
               {/* <p className="subtitle">Save all your tasks</p> */}
             </div>
             <div className="buttonContainer">
-              <a href="/login">
+              <a href="/loginStudent">
                 <Button
                   size="medium"
                   variant="outline-primary"
@@ -33,7 +33,7 @@ const LandingPage = ({ history }) => {
                   Login
                 </Button>
               </a>
-              <a href="/register">
+              <a href="/registerStudent">
                 <Button
                   variant="outline-primary"
                   size="medium"
