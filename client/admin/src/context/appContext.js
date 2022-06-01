@@ -1,5 +1,5 @@
 import React, { useReducer, useContext } from "react";
-
+import download from "downloadjs";
 import reducer from "./reducer";
 import axios from "axios";
 import {
@@ -16,6 +16,11 @@ import {
   ADD_DOCUMENT_BEGIN,
   ADD_DOCUMENT_SUCCESS,
   ADD_DOCUMENT_ERROR,
+  GET_DOCS_BEGIN,
+  GET_DOCS_SUCCESS,
+  DOC_DOWNLOAD_BEGIN,
+  DOC_DOWNLOAD_SUCCESS,
+  DOC_DOWNLOAD_ERROR,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -29,7 +34,10 @@ const initialState = {
   admin: admin ? JSON.parse(admin) : null,
   token: token,
   showSidebar: false,
-  documents: [],
+  docs: [],
+  totalDocs: 0,
+  numOfPages: 1,
+  page: 1,
   isEditing: false,
 };
 
@@ -166,6 +174,82 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  //get all documents
+  const getAllDocuments = async () => {
+    dispatch({ type: GET_DOCS_BEGIN });
+
+    try {
+      const { data } = await axios.get("http://localhost:5000/api/v1/docs", {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+
+      const { docs, totalDocs, numOfPages } = data;
+
+      dispatch({
+        type: GET_DOCS_SUCCESS,
+        payload: {
+          docs,
+          totalDocs,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutAdmin();
+    }
+    clearAlert();
+  };
+
+  //download document
+  const downloadFile = async (values) => {
+    const { id, path, mimetype } = values;
+
+    dispatch({ type: DOC_DOWNLOAD_BEGIN });
+
+    try {
+      const result = await axios.get(
+        `http://localhost:5000/api/v1/docs/${id}`,
+        {
+          responseType: "blob",
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      const split = path.split("/");
+      const filename = split[split.length - 1];
+
+      dispatch({
+        type: DOC_DOWNLOAD_SUCCESS,
+        payload: {
+          result,
+          filename,
+          mimetype,
+        },
+      });
+      // download(result.data, filename, mimetype);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        dispatch({
+          type: DOC_DOWNLOAD_ERROR,
+          payload: { msg: error.response.data.msg },
+        });
+      }
+    }
+  };
+
+  //update document
+  const setEditDoc = (id) => {
+    console.log(`set edit job : ${id}`);
+  };
+
+  //delete document
+  const deleteDoc = (id) => {
+    console.log(`delete : ${id}`);
+  };
+
   //
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
@@ -187,6 +271,10 @@ const AppProvider = ({ children }) => {
         logoutAdmin,
         updateAdmin,
         addDocument,
+        getAllDocuments,
+        downloadFile,
+        setEditDoc,
+        deleteDoc,
       }}
     >
       {children}

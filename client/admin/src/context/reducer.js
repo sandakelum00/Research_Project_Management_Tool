@@ -1,4 +1,5 @@
 import React from "react";
+import download from "downloadjs";
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
@@ -13,6 +14,11 @@ import {
   ADD_DOCUMENT_BEGIN,
   ADD_DOCUMENT_SUCCESS,
   ADD_DOCUMENT_ERROR,
+  GET_DOCS_BEGIN,
+  GET_DOCS_SUCCESS,
+  DOC_DOWNLOAD_BEGIN,
+  DOC_DOWNLOAD_SUCCESS,
+  DOC_DOWNLOAD_ERROR,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -123,6 +129,46 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === ADD_DOCUMENT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === GET_DOCS_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+  if (action.type === GET_DOCS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      docs: action.payload.docs,
+      totalDocs: action.payload.totalDocs,
+      numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === DOC_DOWNLOAD_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  if (action.type === DOC_DOWNLOAD_SUCCESS) {
+    download(
+      action.payload.result.data,
+      action.payload.filename,
+      action.payload.mimetype
+    );
+    return {
+      ...state,
+      isLoading: false,
+      alertType: "success",
+      alertText: "Document downloading....",
+    };
+  }
+  if (action.type === DOC_DOWNLOAD_ERROR) {
     return {
       ...state,
       isLoading: false,

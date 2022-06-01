@@ -6,6 +6,9 @@ import Navbar from "../components/Navbar";
 import SmallSidebar from "../components/SmallSidebar";
 import BigSidebar from "../components/BigSidebar";
 import NavLinks from "./NavLinks";
+import DocsContainer from "./DocsContainer";
+import SearchContainer from "./SearchContainer";
+import Loading from "./Loading";
 
 export {
   Logo,
@@ -16,4 +19,7 @@ export {
   SmallSidebar,
   BigSidebar,
   NavLinks,
+  DocsContainer,
+  SearchContainer,
+  Loading,
 };

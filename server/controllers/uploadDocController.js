@@ -84,6 +84,27 @@ const getAllDoc = async (req, res, next) => {
   }
 };
 
+const downloadDoc = async (req, res, next) => {
+  try {
+    const { id: docId } = req.params;
+
+    const file = await UploadDoc.findOne({ _id: docId });
+
+    if (!file) {
+      const err = new NotFoundError(`No document with id :${docId}`);
+      next(err);
+    }
+
+    res.set({
+      "Content-Type": file.file_mimetype,
+    });
+
+    res.sendFile(path.join(__dirname, "..", file.file_path));
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateDoc = async (req, res, next) => {
   try {
     const { id: docId } = req.params;
@@ -148,4 +169,10 @@ const fileSizeFormatter = (bytes, decimal) => {
   );
 };
 
-module.exports = { uploadDocument, getAllDoc, updateDoc, deleteDoc };
+module.exports = {
+  downloadDoc,
+  uploadDocument,
+  getAllDoc,
+  updateDoc,
+  deleteDoc,
+};

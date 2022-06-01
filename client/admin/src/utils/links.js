@@ -1,9 +1,11 @@
 import React from "react";
 import { IoBarChartSharp } from "react-icons/io5";
-import { MdQueryStats } from "react-icons/md";
 import { IoDocumentAttachOutline } from "react-icons/io5";
+import { HiOutlineDocumentReport } from "react-icons/hi";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { FaWpforms } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
+import { MdQueryStats } from "react-icons/md";
 
 const links = [
   {
@@ -12,23 +14,25 @@ const links = [
     path: "/",
     icon: <IoBarChartSharp />,
   },
+
   {
     id: 2,
+    text: "all documents",
+    path: "all-docs",
+    icon: <HiOutlineDocumentReport />,
+  },
+  {
+    id: 3,
     text: "add document",
     path: "add-doc",
     icon: <IoDocumentAttachOutline />,
   },
-  // {
-  //   id: 3,
-  //   text: "add job",
-  //   path: "add-job",
-  //   icon: <FaWpforms />,
-  // },
+
   {
     id: 4,
     text: "profile",
     path: "profile",
-    icon: <ImProfile />,
+    icon: <GiPlagueDoctorProfile />,
   },
 ];
 
