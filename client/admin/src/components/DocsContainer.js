@@ -7,11 +7,21 @@ import { Table } from "react-bootstrap";
 // import PageBtnContainer from "./PageBtnContainer";
 
 const DocsContainer = () => {
-  const { getAllDocuments, docs, isLoading, page, totalDocs } = useAppContext();
+  const {
+    getAllDocuments,
+    docs,
+    isLoading,
+    page,
+    totalDocs,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useAppContext();
 
   useEffect(() => {
     getAllDocuments();
-  }, []);
+  }, [search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;

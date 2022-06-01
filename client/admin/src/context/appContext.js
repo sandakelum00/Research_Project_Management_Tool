@@ -26,6 +26,8 @@ import {
   EDIT_DOC_SUCCESS,
   EDIT_DOC_ERROR,
   DELETE_DOC_BEGIN,
+  HANDLE_CHANGE,
+  CLEAR_FILTERS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -40,11 +42,17 @@ const initialState = {
   token: token,
   showSidebar: false,
   docs: [],
+  docTypeOptions: ["presentation-template", "marking-scheme"],
   editDocId: "",
   totalDocs: 0,
   numOfPages: 1,
   page: 1,
   isEditing: false,
+  search: "",
+  searchStatus: "all",
+  searchType: "all",
+  sort: "latest",
+  sortOptions: ["latest", "oldest", "a-z", "z-a"],
 };
 
 const AppContext = React.createContext();
@@ -182,10 +190,18 @@ const AppProvider = ({ children }) => {
 
   //get all documents
   const getAllDocuments = async () => {
+    const { search, searchStatus, searchType, sort } = state;
+
+    let url = `http://localhost:5000/api/v1/docs?docType=${searchType}&sort=${sort}`;
+
+    if (search) {
+      url = url + `&search=${search}`;
+    }
+
     dispatch({ type: GET_DOCS_BEGIN });
 
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/docs", {
+      const { data } = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
@@ -291,6 +307,16 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  //clear filter
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
+
+  //handel change
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
   //
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
@@ -317,6 +343,8 @@ const AppProvider = ({ children }) => {
         setEditDoc,
         deleteDocument,
         editDocument,
+        clearFilters,
+        handleChange,
       }}
     >
       {children}

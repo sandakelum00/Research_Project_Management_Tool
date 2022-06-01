@@ -31,3 +31,6 @@ export const EDIT_DOC_SUCCESS = "EDIT_DOC_SUCCESS";
 export const EDIT_DOC_ERROR = "EDIT_DOC_ERROR";
 
 export const DELETE_DOC_BEGIN = "DELETE_DOC_BEGIN";
+
+export const HANDLE_CHANGE = "HANDLE_CHANGE";
+export const CLEAR_FILTERS = "CLEAR_FILTERS";

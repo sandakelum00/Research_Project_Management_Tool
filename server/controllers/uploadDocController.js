@@ -34,9 +34,7 @@ const getAllDoc = async (req, res, next) => {
   try {
     const { docType, sort, search } = req.query;
 
-    const queryObject = {
-      createdBy: req.admin.adminId,
-    };
+    const queryObject = {};
 
     //search from docType
     if (docType && docType !== "all") {

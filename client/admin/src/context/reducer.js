@@ -24,6 +24,8 @@ import {
   EDIT_DOC_SUCCESS,
   EDIT_DOC_ERROR,
   DELETE_DOC_BEGIN,
+  HANDLE_CHANGE,
+  CLEAR_FILTERS,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -223,6 +225,24 @@ const reducer = (state, action) => {
 
   if (action.type === DELETE_DOC_BEGIN) {
     return { ...state, isLoading: true };
+  }
+
+  if (action.type === HANDLE_CHANGE) {
+    return {
+      ...state,
+      page: 1,
+      [action.payload.name]: action.payload.value,
+    };
+  }
+
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      search: "",
+      searchStatus: "all",
+      searchType: "all",
+      sort: "latest",
+    };
   }
 
   throw new Error(`no such action : ${action.type}`);
