@@ -10,8 +10,6 @@ import {
   UPDATE_ADMIN_BEGIN,
   UPDATE_ADMIN_SUCCESS,
   UPDATE_ADMIN_ERROR,
-  HANDLE_CHANGE,
-  CLEAR_VALUES,
   ADD_DOCUMENT_BEGIN,
   ADD_DOCUMENT_SUCCESS,
   ADD_DOCUMENT_ERROR,
@@ -108,30 +106,6 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: "danger",
       alertText: action.payload.msg,
-    };
-  }
-
-  if (action.type === HANDLE_CHANGE) {
-    return {
-      ...state,
-      page: 1,
-      [action.payload.name]: action.payload.value,
-    };
-  }
-
-  if (action.type === CLEAR_VALUES) {
-    const initialState = {
-      isEditing: false,
-      editDocId: "",
-      file: "",
-      docTitle: "",
-      docDescription: "",
-      docType: "presentation-template",
-    };
-
-    return {
-      ...state,
-      ...initialState,
     };
   }
 

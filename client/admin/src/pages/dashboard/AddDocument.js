@@ -4,30 +4,30 @@ import { useAppContext } from "../../context/appContext";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import Dropzone from "react-dropzone";
 
+const initialState = {
+  docTitle: "",
+  docDescription: "",
+  docTypeOptions: ["presentation-template", "marking-scheme"],
+  docType: "presentation-template",
+};
+
 const AddDocument = () => {
   const {
     isLoading,
     isEditing,
     showAlert,
     displayAlert,
-    docTitle,
-    docDescription,
-    docType,
-    docTypeOptions,
-    handleChange,
-    clearValues,
     addDocument,
     editJob,
   } = useAppContext();
 
   const dropRef = useRef();
 
+  const [values, setValues] = useState(initialState);
   const [file, setFile] = useState(null);
 
   const handleDocInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    handleChange({ name, value });
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const onDrop = (files) => {
@@ -52,6 +52,8 @@ const AddDocument = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const { docTitle, docDescription, docType } = values;
+
     if (!file || !docTitle || !docDescription || !docType) {
       displayAlert();
       return;
@@ -68,6 +70,20 @@ const AddDocument = () => {
     formData.append("docDescription", docDescription);
 
     addDocument(formData);
+
+    clearValues();
+  };
+
+  const clearValues = () => {
+    setValues({
+      ...values,
+      editDocId: "",
+      docTitle: "",
+      docDescription: "",
+      docType: "presentation-template",
+    });
+
+    setFile("");
   };
 
   return (
@@ -81,17 +97,8 @@ const AddDocument = () => {
             type="text"
             name="docTitle"
             labelText="document title"
-            value={docTitle}
+            value={values.docTitle}
             handleChange={handleDocInput}
-          />
-
-          {/* doc type */}
-          <FormRowSelect
-            name="docType"
-            labelText="document type"
-            value={docType}
-            handleChange={handleDocInput}
-            list={docTypeOptions}
           />
 
           {/* docDescription */}
@@ -99,10 +106,20 @@ const AddDocument = () => {
             type="text"
             labelText="document description"
             name="docDescription"
-            value={docDescription}
+            value={values.docDescription}
             handleChange={handleDocInput}
           />
 
+          {/* doc type */}
+          <FormRowSelect
+            name="docType"
+            labelText="document type"
+            value={values.docType}
+            handleChange={handleDocInput}
+            list={values.docTypeOptions}
+          />
+
+          {/* file upload section */}
           <div className="upload-section">
             <Dropzone
               onDrop={onDrop}

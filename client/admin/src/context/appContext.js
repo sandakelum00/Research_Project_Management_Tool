@@ -13,8 +13,6 @@ import {
   UPDATE_ADMIN_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_ADMIN,
-  HANDLE_CHANGE,
-  CLEAR_VALUES,
   ADD_DOCUMENT_BEGIN,
   ADD_DOCUMENT_SUCCESS,
   ADD_DOCUMENT_ERROR,
@@ -33,12 +31,6 @@ const initialState = {
   showSidebar: false,
   documents: [],
   isEditing: false,
-  editDocId: "",
-  file: "",
-  docTitle: "",
-  docDescription: "",
-  docTypeOptions: ["presentation-template", "marking-scheme"],
-  docType: "presentation-template",
 };
 
 const AppContext = React.createContext();
@@ -164,7 +156,6 @@ const AppProvider = ({ children }) => {
 
       console.log(response);
       dispatch({ type: ADD_DOCUMENT_SUCCESS });
-      dispatch({ type: CLEAR_VALUES });
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({
@@ -186,16 +177,6 @@ const AppProvider = ({ children }) => {
     removeAdminFromLocalStorage();
   };
 
-  //handel change function
-  const handleChange = ({ name, value }) => {
-    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
-  };
-
-  //clear value function
-  const clearValues = () => {
-    dispatch({ type: CLEAR_VALUES });
-  };
-
   return (
     <AppContext.Provider
       value={{
@@ -205,8 +186,6 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutAdmin,
         updateAdmin,
-        handleChange,
-        clearValues,
         addDocument,
       }}
     >

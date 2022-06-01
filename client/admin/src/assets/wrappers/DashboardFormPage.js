@@ -69,6 +69,31 @@ const Wrapper = styled.section`
       margin-top: 0;
     }
   }
+  .upload-section {
+    display: flex;
+    height: 150px;
+    margin-top: 10px;
+    & > div {
+      width: 100%;
+    }
+  }
+
+  .drop-zone {
+    margin-bottom: 10px;
+    padding: 40px 10px;
+    height: inherit;
+    border: 2px dashed var(--grey-200);
+    background: var(--backgroundColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 export default Wrapper;
