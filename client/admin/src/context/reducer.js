@@ -19,6 +19,11 @@ import {
   DOC_DOWNLOAD_BEGIN,
   DOC_DOWNLOAD_SUCCESS,
   DOC_DOWNLOAD_ERROR,
+  SET_EDIT_DOC,
+  EDIT_DOC_BEGIN,
+  EDIT_DOC_SUCCESS,
+  EDIT_DOC_ERROR,
+  DELETE_DOC_BEGIN,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -128,6 +133,7 @@ const reducer = (state, action) => {
       alertText: "New Document Created!",
     };
   }
+
   if (action.type === ADD_DOCUMENT_ERROR) {
     return {
       ...state,
@@ -141,6 +147,7 @@ const reducer = (state, action) => {
   if (action.type === GET_DOCS_BEGIN) {
     return { ...state, isLoading: true, showAlert: false };
   }
+
   if (action.type === GET_DOCS_SUCCESS) {
     return {
       ...state,
@@ -168,6 +175,7 @@ const reducer = (state, action) => {
       alertText: "Document downloading....",
     };
   }
+
   if (action.type === DOC_DOWNLOAD_ERROR) {
     return {
       ...state,
@@ -176,6 +184,45 @@ const reducer = (state, action) => {
       alertType: "danger",
       alertText: action.payload.msg,
     };
+  }
+
+  if (action.type === SET_EDIT_DOC) {
+    return {
+      ...state,
+      isEditing: true,
+      editDocId: action.payload.id,
+    };
+  }
+
+  if (action.type === EDIT_DOC_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === EDIT_DOC_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Document Updated!",
+    };
+  }
+
+  if (action.type === EDIT_DOC_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === DELETE_DOC_BEGIN) {
+    return { ...state, isLoading: true };
   }
 
   throw new Error(`no such action : ${action.type}`);

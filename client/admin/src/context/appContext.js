@@ -21,6 +21,11 @@ import {
   DOC_DOWNLOAD_BEGIN,
   DOC_DOWNLOAD_SUCCESS,
   DOC_DOWNLOAD_ERROR,
+  SET_EDIT_DOC,
+  EDIT_DOC_BEGIN,
+  EDIT_DOC_SUCCESS,
+  EDIT_DOC_ERROR,
+  DELETE_DOC_BEGIN,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -35,6 +40,7 @@ const initialState = {
   token: token,
   showSidebar: false,
   docs: [],
+  editDocId: "",
   totalDocs: 0,
   numOfPages: 1,
   page: 1,
@@ -242,12 +248,47 @@ const AppProvider = ({ children }) => {
 
   //update document
   const setEditDoc = (id) => {
-    console.log(`set edit job : ${id}`);
+    dispatch({ type: SET_EDIT_DOC, payload: { id } });
+  };
+
+  const editDocument = async (formData) => {
+    dispatch({ type: EDIT_DOC_BEGIN });
+
+    try {
+      await axios.put(
+        `http://localhost:5000/api/v1/docs/${state.editDocId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+
+      dispatch({ type: EDIT_DOC_SUCCESS });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: EDIT_DOC_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
   };
 
   //delete document
-  const deleteDoc = (id) => {
-    console.log(`delete : ${id}`);
+  const deleteDocument = async (id) => {
+    dispatch({ type: DELETE_DOC_BEGIN });
+
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/docs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+      getAllDocuments();
+    } catch (error) {
+      logoutAdmin();
+    }
   };
 
   //
@@ -274,7 +315,8 @@ const AppProvider = ({ children }) => {
         getAllDocuments,
         downloadFile,
         setEditDoc,
-        deleteDoc,
+        deleteDocument,
+        editDocument,
       }}
     >
       {children}

@@ -11,6 +11,6 @@ const {
 } = require("../controllers/uploadDocController.js");
 
 router.route("/").post(upload.single("file"), uploadDocument).get(getAllDoc);
-router.route("/:id").delete(deleteDoc).patch(updateDoc).get(downloadDoc);
+router.route("/:id").delete(deleteDoc).put(updateDoc).get(downloadDoc);
 
 module.exports = router;

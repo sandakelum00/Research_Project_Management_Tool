@@ -13,7 +13,7 @@ const Doc = ({
   file_path,
   file_mimetype,
 }) => {
-  const { downloadFile, setEditDoc, deleteDoc } = useAppContext();
+  const { downloadFile, setEditDoc, deleteDocument } = useAppContext();
   let date = moment(createdAt);
   date = date.format("MMM Do, YYYY");
 
@@ -40,7 +40,7 @@ const Doc = ({
           </a>
 
           <Link
-            to="/add-doc"
+            to="/edit-doc"
             className="btn edit-btn"
             onClick={() => setEditDoc(_id)}
           >
@@ -49,7 +49,7 @@ const Doc = ({
           <button
             type="button"
             className="btn delete-btn"
-            onClick={() => deleteDoc(_id)}
+            onClick={() => deleteDocument(_id)}
           >
             Delete
           </button>

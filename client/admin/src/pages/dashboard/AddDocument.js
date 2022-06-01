@@ -12,14 +12,7 @@ const initialState = {
 };
 
 const AddDocument = () => {
-  const {
-    isLoading,
-    isEditing,
-    showAlert,
-    displayAlert,
-    addDocument,
-    editJob,
-  } = useAppContext();
+  const { isLoading, showAlert, displayAlert, addDocument } = useAppContext();
 
   const dropRef = useRef();
 
@@ -58,10 +51,6 @@ const AddDocument = () => {
       displayAlert();
       return;
     }
-    // if (isEditing) {
-    //   editJob();
-    //   return;
-    // }
 
     const formData = new FormData();
     formData.append("file", file);
@@ -89,7 +78,7 @@ const AddDocument = () => {
   return (
     <Wrapper>
       <form className="form">
-        <h3>{isEditing ? "edit document" : "add document"}</h3>
+        <h3>add document</h3>
         {showAlert && <Alert />}
         <div className="form-center">
           {/* docTitle */}
@@ -100,7 +89,6 @@ const AddDocument = () => {
             value={values.docTitle}
             handleChange={handleDocInput}
           />
-
           {/* docDescription */}
           <FormRow
             type="text"
@@ -109,7 +97,6 @@ const AddDocument = () => {
             value={values.docDescription}
             handleChange={handleDocInput}
           />
-
           {/* doc type */}
           <FormRowSelect
             name="docType"
@@ -118,7 +105,6 @@ const AddDocument = () => {
             handleChange={handleDocInput}
             list={values.docTypeOptions}
           />
-
           {/* file upload section */}
           <div className="upload-section">
             <Dropzone
@@ -142,7 +128,6 @@ const AddDocument = () => {
               )}
             </Dropzone>
           </div>
-
           {/* btn container */}
           <div className="btn-container">
             <button

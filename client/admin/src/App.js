@@ -8,6 +8,7 @@ import {
   SharedLayout,
   AddDocument,
   AllDocuments,
+  EditDoc,
 } from "./pages/dashboard";
 
 function app() {
@@ -26,6 +27,7 @@ function app() {
           <Route path="add-doc" element={<AddDocument />}></Route>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="all-docs" element={<AllDocuments />}></Route>
+          <Route path="edit-doc" element={<EditDoc />}></Route>
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Error />} />

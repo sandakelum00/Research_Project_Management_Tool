@@ -30,7 +30,7 @@ const Wrapper = styled.section`
 
   .download-btn {
     color: var(--grey-900);
-    background: var(--primary-500);
+    background: var(--primary-300);
   }
 
   .delete-btn {
@@ -55,6 +55,18 @@ const Wrapper = styled.section`
   .actions {
     display: block;
     text-align: center;
+  }
+
+  thead th {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #fafafa;
+  }
+
+  tbody td {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background-color: #fafafa;
   }
 `;
 export default Wrapper;

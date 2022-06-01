@@ -32,7 +32,7 @@ const DocsContainer = () => {
       </h5>
 
       <div className="docs">
-        <Table bordered hover size="sm">
+        <Table bordered hover size="sm" className="table text-center">
           <thead>
             <tr>
               <th>Title</th>
