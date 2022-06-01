@@ -29,12 +29,6 @@ const LoginStudent = () => {
     const submitHandler = async (e) => {
       e.preventDefault();
 
-      // if(userInfo){
-
-      //   window.location.assign("/homeStudent");
-  
-      // }
-  
       dispatch(login(studentId, password));
     };
 

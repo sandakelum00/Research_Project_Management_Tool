@@ -24,16 +24,16 @@ const Header = () => {
         <p>
           <a href="/">
             {" "}
-            <img src="/images/logo.png" href="/" alt="logo" />{" "}
+            <img style={{ marginTop: "10px" }} src="/images/logo.png" href="/" alt="logo" />{" "}
           </a>
         </p>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {userInfo ? (
             <Nav className="ml-auto">
-              <Nav.Link href="/homeStudent">My tasks</Nav.Link>
+              <Nav.Link style={{ marginLeft: "850px", marginBottom: "10px" }} href="/homeStudent">Dashboard</Nav.Link>
               <NavDropdown title={userInfo?.fullName} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                <NavDropdown.Item href="profileStudent">My Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/" onClick={logoutHandler}>
                   Logout

@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const studentRoutes = require("./routes/studentRoutes");
 const studentGroupRoutes = require("./routes/studentGroupRoute");
+const submissionRoute = require("./routes/groupSubmissionRoute");
 const cors = require("cors");
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use("/api/students", studentRoutes);
 app.use("/api/studentGroup", studentGroupRoutes);
+app.use("/api/groupSubmission", submissionRoute);
 
 const PORT = process.env.PORT || 5000;
 

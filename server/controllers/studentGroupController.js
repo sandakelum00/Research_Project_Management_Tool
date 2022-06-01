@@ -1,15 +1,16 @@
 const asyncHandler = require("express-async-handler");
+const res = require("express/lib/response");
 const StudentGroup = require("../models/StudentGroup");
 
 const createStudentGroup = asyncHandler(async(req, res) => {
-    const {} = req.body;
+    const {teamName, s1sid, s1email, s2sid, s2email, s3sid, s3email, s4sid, s4email} = req.body;
 
-        if(!student1.sid || student2.sid || student3.sid || student4.sid) {
+        if(!s1sid, !s2sid, !s3sid, !s4sid) {
             res.status(400);
     throw new Error("Please fill all the fields");
         }
         else {
-            const studentGroup = new StudentGroup({ sid, email })
+            const studentGroup = new StudentGroup({ student: req.student._id, teamName, s1sid, s1email, s2sid, s2email, s3sid, s3email, s4sid, s4email})
 
             const createdStudentGroup = await studentGroup.save();
 

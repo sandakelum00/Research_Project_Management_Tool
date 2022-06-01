@@ -8,6 +8,9 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Home from "./screens/Home/Home";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Profile from "./screens/Profile/studentProfile"
+import Team from "./screens/Teams/team";
+import CreateTeam from "./screens/Teams/createTeam";
 
 const App = () => (
   <BrowserRouter>
@@ -18,6 +21,9 @@ const App = () => (
         <Route path="/loginStudent" element={<StudentLogin />}></Route>
         <Route path="/homeStudent" element={<Home />}></Route>
         <Route path="/sidebar" element={<Sidebar />}></Route>
+        <Route path="/profileStudent" element={<Profile />}></Route>
+        <Route path="/team" element={<Team />}></Route>
+        <Route path="/createTeam" element={<CreateTeam />}></Route>
       </Routes>
     <Footer/>
   </BrowserRouter>

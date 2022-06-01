@@ -3,9 +3,11 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { studentRegisterReducer } from "./reducers/studentReducer";
 import { studentLoginReducer } from "./reducers/studentReducer"
+import { studentUpdateReducer } from "./reducers/studentReducer";
 const reducer = combineReducers({
   studentRegister: studentRegisterReducer,
   studentLogin: studentLoginReducer,
+  studentUpdate: studentUpdateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

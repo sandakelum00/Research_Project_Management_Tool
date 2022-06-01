@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 
 const studentGroupSchema = mongoose.Schema(
   {
+    teamName: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     s1sid: {
       type: String,
       required: true,
@@ -41,10 +45,16 @@ const studentGroupSchema = mongoose.Schema(
       type: String,
       unique: true,
     },
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "StudentModel",
+    },
   },
   {
     timeStamps: true,
-  }
+  },
+  
 );
 
 const StudentGroup = mongoose.model("StudentGroup", studentGroupSchema);
