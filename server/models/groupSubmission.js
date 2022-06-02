@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const groupSubmissionSchema = mongoose.Schema(
   {
-    teamName: {
+    title: {
       type: String,
       required: true,
       unique: true,

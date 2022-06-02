@@ -4,10 +4,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { studentRegisterReducer } from "./reducers/studentReducer";
 import { studentLoginReducer } from "./reducers/studentReducer"
 import { studentUpdateReducer } from "./reducers/studentReducer";
+import { groupCreateReducer } from "./reducers/groupReducer";
 const reducer = combineReducers({
   studentRegister: studentRegisterReducer,
   studentLogin: studentLoginReducer,
   studentUpdate: studentUpdateReducer,
+  groupCreate: groupCreateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
