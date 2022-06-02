@@ -1,4 +1,4 @@
-const Staff = require("../models/Staff.js");
+const Staff = require("../models/StaffManage");
 const { BadRequestError, NotFoundError } = require("../errors/index.js");
 
 const getAllStaff = async (req, res, next) => {

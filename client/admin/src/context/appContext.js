@@ -318,15 +318,13 @@ const AppProvider = ({ children }) => {
 
   //get all staff
   const getAllStaff = async () => {
-    // const { search, searchStatus, searchType, sort } = state;
+    const { search, searchStatus, searchType, sort } = state;
 
-    // let url = `http://localhost:5000/api/v1/docs?docType=${searchType}&sort=${sort}`;
+    let url = `http://localhost:5000/api/v1/staff?userposition=${searchType}&sort=${sort}`;
 
-    // if (search) {
-    //   url = url + `&search=${search}`;
-    // }
-
-    let url = `http://localhost:5000/api/v1/staff`;
+    if (search) {
+      url = url + `&search=${search}`;
+    }
 
     dispatch({ type: GET_STAFF_BEGIN });
 

@@ -5,7 +5,7 @@ const {
   getAllStaff,
   updateStaff,
   deleteStaff,
-} = require("../controllers/staffController.js");
+} = require("../controllers/staffManageController.js");
 
 router.route("/").get(getAllStaff);
 router.route("/:id").delete(deleteStaff).put(updateStaff);

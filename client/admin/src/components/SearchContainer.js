@@ -58,15 +58,8 @@ const SearchContainer = () => {
             list={sortOptions}
           />
 
-          {/* sort */}
-          <FormRowSelect
-            name="sort"
-            value={sort}
-            handleChange={handleSearch}
-            list={sortOptions}
-          />
-
           <button
+            style={{ marginTop: "10px" }}
             className="btn btn-block btn-danger"
             disabled={isLoading}
             onClick={handleSubmit}
