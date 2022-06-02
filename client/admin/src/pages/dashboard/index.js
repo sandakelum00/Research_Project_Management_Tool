@@ -4,5 +4,14 @@ import Profile from "./Profile";
 import AllDocuments from "./AllDocuments";
 import SharedLayout from "./SharedLayout";
 import EditDoc from "./EditDoc";
+import Staff from "./Staff";
 
-export { EditDoc, Profile, Stats, SharedLayout, AddDocument, AllDocuments };
+export {
+  Staff,
+  EditDoc,
+  Profile,
+  Stats,
+  SharedLayout,
+  AddDocument,
+  AllDocuments,
+};

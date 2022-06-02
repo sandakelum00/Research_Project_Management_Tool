@@ -9,6 +9,7 @@ import {
   AddDocument,
   AllDocuments,
   EditDoc,
+  Staff,
 } from "./pages/dashboard";
 
 function app() {
@@ -28,6 +29,7 @@ function app() {
           <Route path="profile" element={<Profile />}></Route>
           <Route path="all-docs" element={<AllDocuments />}></Route>
           <Route path="edit-doc" element={<EditDoc />}></Route>
+          <Route path="staff" element={<Staff />}></Route>
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Error />} />
