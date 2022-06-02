@@ -41,13 +41,13 @@ const getAllStaff = async (req, res, next) => {
 
     result = result.skip(skip).limit(limit);
 
-    const staff = await result;
+    const staffs = await result;
 
     const totalStaff = await Staff.countDocuments(queryObject);
 
     const numOfPages = Math.ceil(totalStaff / limit);
 
-    res.status(200).json({ staff, totalStaff, numOfPages });
+    res.status(200).json({ staffs, totalStaff, numOfPages });
   } catch (error) {
     next(error);
   }

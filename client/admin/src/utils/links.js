@@ -18,7 +18,7 @@ const links = [
 
   {
     id: 2,
-    text: "all documents",
+    text: "documents",
     path: "all-docs",
     icon: <HiOutlineDocumentReport />,
   },

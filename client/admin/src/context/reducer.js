@@ -26,6 +26,13 @@ import {
   DELETE_DOC_BEGIN,
   HANDLE_CHANGE,
   CLEAR_FILTERS,
+  GET_STAFF_BEGIN,
+  GET_STAFF_SUCCESS,
+  SET_EDIT_STAFF,
+  EDIT_STAFF_BEGIN,
+  EDIT_STAFF_SUCCESS,
+  EDIT_STAFF_ERROR,
+  DELETE_STAFF_BEGIN,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -243,6 +250,59 @@ const reducer = (state, action) => {
       searchType: "all",
       sort: "latest",
     };
+  }
+
+  if (action.type === GET_STAFF_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_STAFF_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      staffs: action.payload.staffs,
+      totalStaff: action.payload.totalStaff,
+      numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === SET_EDIT_STAFF) {
+    return {
+      ...state,
+      isEditing: true,
+      editStaffId: action.payload.id,
+    };
+  }
+
+  if (action.type === EDIT_STAFF_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === EDIT_STAFF_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Staff Updated!",
+    };
+  }
+
+  if (action.type === EDIT_STAFF_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === DELETE_STAFF_BEGIN) {
+    return { ...state, isLoading: true };
   }
 
   throw new Error(`no such action : ${action.type}`);

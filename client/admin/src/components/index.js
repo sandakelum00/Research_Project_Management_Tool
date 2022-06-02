@@ -9,6 +9,8 @@ import NavLinks from "./NavLinks";
 import DocsContainer from "./DocsContainer";
 import SearchContainer from "./SearchContainer";
 import Loading from "./Loading";
+import StaffSearchContainer from "./StaffSearchContainer";
+import StaffContainer from "./StaffContainer";
 
 export {
   Logo,
@@ -22,4 +24,6 @@ export {
   DocsContainer,
   SearchContainer,
   Loading,
+  StaffContainer,
+  StaffSearchContainer,
 };

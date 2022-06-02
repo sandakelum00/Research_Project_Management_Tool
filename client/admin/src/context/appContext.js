@@ -1,5 +1,4 @@
 import React, { useReducer, useContext } from "react";
-import download from "downloadjs";
 import reducer from "./reducer";
 import axios from "axios";
 import {
@@ -28,6 +27,13 @@ import {
   DELETE_DOC_BEGIN,
   HANDLE_CHANGE,
   CLEAR_FILTERS,
+  GET_STAFF_BEGIN,
+  GET_STAFF_SUCCESS,
+  SET_EDIT_STAFF,
+  EDIT_STAFF_BEGIN,
+  EDIT_STAFF_SUCCESS,
+  EDIT_STAFF_ERROR,
+  DELETE_STAFF_BEGIN,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -53,6 +59,9 @@ const initialState = {
   searchType: "all",
   sort: "latest",
   sortOptions: ["latest", "oldest", "a-z", "z-a"],
+  staffs: [],
+  editStaffId: "",
+  staffTypeOptions: ["supervisor", "co-supervisor"],
 };
 
 const AppContext = React.createContext();
@@ -219,7 +228,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
-      // logoutAdmin();
+      logoutAdmin();
     }
     clearAlert();
   };
@@ -307,6 +316,89 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  //get all staff
+  const getAllStaff = async () => {
+    // const { search, searchStatus, searchType, sort } = state;
+
+    // let url = `http://localhost:5000/api/v1/docs?docType=${searchType}&sort=${sort}`;
+
+    // if (search) {
+    //   url = url + `&search=${search}`;
+    // }
+
+    let url = `http://localhost:5000/api/v1/staff`;
+
+    dispatch({ type: GET_STAFF_BEGIN });
+
+    try {
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+
+      const { staffs, totalStaff, numOfPages } = data;
+
+      dispatch({
+        type: GET_STAFF_SUCCESS,
+        payload: {
+          staffs,
+          totalStaff,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      logoutAdmin();
+    }
+    clearAlert();
+  };
+
+  //update staff
+  const setEditStaff = (id) => {
+    dispatch({ type: SET_EDIT_STAFF, payload: { id } });
+  };
+
+  const editStaff = async (formData) => {
+    dispatch({ type: EDIT_STAFF_BEGIN });
+
+    try {
+      await axios.put(
+        `http://localhost:5000/api/v1/staff/${state.editStaffId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+
+      dispatch({ type: EDIT_STAFF_SUCCESS });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: EDIT_STAFF_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
+  //delete staff
+  const deleteStaff = async (id) => {
+    dispatch({ type: DELETE_STAFF_BEGIN });
+
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/staff/${id}`, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+      getAllStaff();
+    } catch (error) {
+      logoutAdmin();
+    }
+  };
+
   //clear filter
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
@@ -345,6 +437,10 @@ const AppProvider = ({ children }) => {
         editDocument,
         clearFilters,
         handleChange,
+        getAllStaff,
+        setEditStaff,
+        deleteStaff,
+        editStaff,
       }}
     >
       {children}
