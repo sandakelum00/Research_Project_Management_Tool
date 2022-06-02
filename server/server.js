@@ -9,6 +9,7 @@ const connectDataBase = require("./config/database.js");
 const adminAuthRoutes = require("./routes/adminAuthRoutes.js");
 const uploadDocRoutes = require("./routes/uploadDocRoutes.js");
 const staffManageRoutes = require("./routes/staffManageRouts.js");
+const panelRoutes = require("./routes/allocatePanelRoutes.js");
 
 //import middleware
 const adminNotFoundMiddleware = require("./middleware/admin-not-found.js");
@@ -28,6 +29,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/admin-auth", adminAuthRoutes);
 app.use("/api/v1/docs", authenticateAdmin, uploadDocRoutes);
 app.use("/api/v1/staff", authenticateAdmin, staffManageRoutes);
+app.use("/api/v1/panel", authenticateAdmin, panelRoutes);
 
 // middleware
 app.use(adminErrorHandlerMiddleware);
