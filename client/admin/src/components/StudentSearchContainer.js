@@ -3,7 +3,7 @@ import { FormRow, FormRowSelect } from ".";
 import { useAppContext } from "../context/appContext";
 import Wrapper from "../assets/wrappers/SearchContainer";
 
-const PanelMembersSearchContainer = () => {
+const StudentSearchContainer = () => {
   const {
     isLoading,
     search,
@@ -12,7 +12,6 @@ const PanelMembersSearchContainer = () => {
     sort,
     sortOptions,
     clearFilters,
-    panelTypeOptions,
     handleChange,
   } = useAppContext();
 
@@ -29,7 +28,7 @@ const PanelMembersSearchContainer = () => {
   return (
     <Wrapper>
       <form className="form">
-        <h4>panel search form</h4>
+        <h4>student search form</h4>
 
         {/* search position */}
         <div className="form-center">
@@ -41,15 +40,6 @@ const PanelMembersSearchContainer = () => {
           ></FormRow>
           {/* rest of the inputs */}
 
-          {/* search by type */}
-          <FormRowSelect
-            labelText="type"
-            name="searchType"
-            value={searchType}
-            handleChange={handleSearch}
-            list={["all", ...panelTypeOptions]}
-          />
-
           {/* sort */}
           <FormRowSelect
             name="sort"
@@ -59,7 +49,6 @@ const PanelMembersSearchContainer = () => {
           />
 
           <button
-            style={{ marginTop: "10px" }}
             className="btn btn-block btn-danger"
             disabled={isLoading}
             onClick={handleSubmit}
@@ -72,4 +61,4 @@ const PanelMembersSearchContainer = () => {
   );
 };
 
-export default PanelMembersSearchContainer;
+export default StudentSearchContainer;

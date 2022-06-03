@@ -40,6 +40,13 @@ import {
   EDIT_PANEL_MEMBER_BEGIN,
   EDIT_PANEL_MEMBER_SUCCESS,
   EDIT_PANEL_MEMBER_ERROR,
+  GET_STUDENT_BEGIN,
+  GET_STUDENT_SUCCESS,
+  SET_EDIT_STUDENT,
+  EDIT_STUDENT_BEGIN,
+  EDIT_STUDENT_SUCCESS,
+  EDIT_STUDENT_ERROR,
+  DELETE_STUDENT_BEGIN,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -72,6 +79,9 @@ const initialState = {
   panelTypeOptions: ["Pending", "Accept", "Reject"],
   totalPanelMembers: 0,
   editMemberId: "",
+  students: [],
+  totalStudents: 0,
+  editStudentId: "",
 };
 
 const AppContext = React.createContext();
@@ -438,7 +448,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
-      // logoutAdmin();
+      logoutAdmin();
     }
     clearAlert();
   };
@@ -469,6 +479,87 @@ const AppProvider = ({ children }) => {
         type: EDIT_PANEL_MEMBER_ERROR,
         payload: { msg: error.response.data.msg },
       });
+    }
+  };
+
+  //get all students
+  const getAllStudents = async () => {
+    const { search, sort } = state;
+
+    let url = `http://localhost:5000/api/v1/student?sort=${sort}`;
+
+    if (search) {
+      url = url + `&search=${search}`;
+    }
+
+    dispatch({ type: GET_STUDENT_BEGIN });
+
+    try {
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+
+      const { students, totalStudents, numOfPages } = data;
+
+      dispatch({
+        type: GET_STUDENT_SUCCESS,
+        payload: {
+          students,
+          totalStudents,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutAdmin();
+    }
+    clearAlert();
+  };
+
+  //update student
+  const setEditStudent = (id) => {
+    dispatch({ type: SET_EDIT_STUDENT, payload: { id } });
+  };
+
+  const editStudent = async (formData) => {
+    dispatch({ type: EDIT_STUDENT_BEGIN });
+
+    try {
+      await axios.put(
+        `http://localhost:5000/api/v1/student/${state.editStudentId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+
+      dispatch({ type: EDIT_STUDENT_SUCCESS });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: EDIT_STUDENT_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
+  //delete student
+  const deleteStudent = async (id) => {
+    dispatch({ type: DELETE_STUDENT_BEGIN });
+
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/student/${id}`, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+      getAllStudents();
+    } catch (error) {
+      // logoutAdmin();
     }
   };
 
@@ -517,6 +608,10 @@ const AppProvider = ({ children }) => {
         getAllPanelMembers,
         editPanelMember,
         setEditPanelMember,
+        getAllStudents,
+        setEditStudent,
+        editStudent,
+        deleteStudent,
       }}
     >
       {children}

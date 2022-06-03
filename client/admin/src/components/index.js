@@ -13,6 +13,8 @@ import StaffSearchContainer from "./StaffSearchContainer";
 import StaffContainer from "./StaffContainer";
 import PanelMembersContainer from "./PanelMembersContainer";
 import PanelMembersSearchContainer from "./PanelMembersSearchContainer";
+import StudentSearchContainer from "./StudentSearchContainer";
+import StudentContainer from "./StudentContainer";
 
 export {
   Logo,
@@ -30,4 +32,6 @@ export {
   StaffSearchContainer,
   PanelMembersContainer,
   PanelMembersSearchContainer,
+  StudentSearchContainer,
+  StudentContainer,
 };

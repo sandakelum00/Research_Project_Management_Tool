@@ -39,6 +39,13 @@ import {
   EDIT_PANEL_MEMBER_BEGIN,
   EDIT_PANEL_MEMBER_SUCCESS,
   EDIT_PANEL_MEMBER_ERROR,
+  GET_STUDENT_BEGIN,
+  GET_STUDENT_SUCCESS,
+  SET_EDIT_STUDENT,
+  EDIT_STUDENT_BEGIN,
+  EDIT_STUDENT_SUCCESS,
+  EDIT_STUDENT_ERROR,
+  DELETE_STUDENT_BEGIN,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -358,6 +365,59 @@ const reducer = (state, action) => {
       alertType: "danger",
       alertText: action.payload.msg,
     };
+  }
+
+  if (action.type === GET_STUDENT_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_STUDENT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      students: action.payload.students,
+      totalStudents: action.payload.totalStudents,
+      numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === SET_EDIT_STUDENT) {
+    return {
+      ...state,
+      isEditing: true,
+      editStudentId: action.payload.id,
+    };
+  }
+
+  if (action.type === EDIT_STUDENT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === EDIT_STUDENT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Student Updated!",
+    };
+  }
+
+  if (action.type === EDIT_STUDENT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === DELETE_STUDENT_BEGIN) {
+    return { ...state, isLoading: true };
   }
 
   throw new Error(`no such action : ${action.type}`);

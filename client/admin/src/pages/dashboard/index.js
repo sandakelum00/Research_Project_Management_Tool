@@ -8,6 +8,8 @@ import Staffs from "./Staffs";
 import EditStaff from "./EditStaff";
 import PanelMembers from "./PanelMembers";
 import EditPanelMember from "./EditPanelMember";
+import Students from "./Students";
+import EditStudent from "./EditStudent";
 
 export {
   Staffs,
@@ -20,4 +22,6 @@ export {
   AllDocuments,
   PanelMembers,
   EditPanelMember,
+  Students,
+  EditStudent,
 };

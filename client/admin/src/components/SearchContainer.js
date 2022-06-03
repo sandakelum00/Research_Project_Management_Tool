@@ -29,7 +29,7 @@ const SearchContainer = () => {
   return (
     <Wrapper>
       <form className="form">
-        <h4>search form</h4>
+        <h4>document search form</h4>
 
         {/* search position */}
         <div className="form-center">

@@ -4,8 +4,7 @@ import { IoDocumentAttachOutline } from "react-icons/io5";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { FiUsers } from "react-icons/fi";
-import { FaUserGraduate } from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
+import { RiGroupLine } from "react-icons/ri";
 import { MdAddchart } from "react-icons/md";
 
 const links = [
@@ -45,6 +44,13 @@ const links = [
 
   {
     id: 6,
+    text: "students",
+    path: "students",
+    icon: <RiGroupLine />,
+  },
+
+  {
+    id: 7,
     text: "profile",
     path: "profile",
     icon: <GiPlagueDoctorProfile />,
