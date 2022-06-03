@@ -68,5 +68,26 @@ const Wrapper = styled.section`
     padding-bottom: 14px;
     background-color: #fafafa;
   }
+
+  .status {
+    border-radius: var(--borderRadius);
+    text-transform: capitalize;
+    letter-spacing: var(--letterSpacing);
+    text-align: center;
+    width: auto;
+  }
+
+  .Pending {
+    background: #fcefc7;
+    color: #e9b949;
+  }
+  .Accept {
+    background: #e0e8f9;
+    color: #647acb;
+  }
+  .Reject {
+    color: #d66a6a;
+    background: #ffeeee;
+  }
 `;
 export default Wrapper;

@@ -4,9 +4,9 @@ import { IoDocumentAttachOutline } from "react-icons/io5";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { FiUsers } from "react-icons/fi";
-import { FaWpforms } from "react-icons/fa";
+import { FaUserGraduate } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
-import { MdQueryStats } from "react-icons/md";
+import { MdAddchart } from "react-icons/md";
 
 const links = [
   {
@@ -31,13 +31,20 @@ const links = [
 
   {
     id: 4,
+    text: "allocate panel",
+    path: "panel-member",
+    icon: <MdAddchart />,
+  },
+
+  {
+    id: 5,
     text: "staff",
     path: "staff",
     icon: <FiUsers />,
   },
 
   {
-    id: 5,
+    id: 6,
     text: "profile",
     path: "profile",
     icon: <GiPlagueDoctorProfile />,

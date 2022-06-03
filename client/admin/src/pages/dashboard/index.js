@@ -6,6 +6,8 @@ import SharedLayout from "./SharedLayout";
 import EditDoc from "./EditDoc";
 import Staffs from "./Staffs";
 import EditStaff from "./EditStaff";
+import PanelMembers from "./PanelMembers";
+import EditPanelMember from "./EditPanelMember";
 
 export {
   Staffs,
@@ -16,4 +18,6 @@ export {
   SharedLayout,
   AddDocument,
   AllDocuments,
+  PanelMembers,
+  EditPanelMember,
 };

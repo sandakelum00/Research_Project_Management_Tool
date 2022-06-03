@@ -33,6 +33,12 @@ import {
   EDIT_STAFF_SUCCESS,
   EDIT_STAFF_ERROR,
   DELETE_STAFF_BEGIN,
+  GET_PANEL_MEMBER_BEGIN,
+  GET_PANEL_MEMBER_SUCCESS,
+  SET_EDIT_PANEL_MEMBER,
+  EDIT_PANEL_MEMBER_BEGIN,
+  EDIT_PANEL_MEMBER_SUCCESS,
+  EDIT_PANEL_MEMBER_ERROR,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -303,6 +309,55 @@ const reducer = (state, action) => {
 
   if (action.type === DELETE_STAFF_BEGIN) {
     return { ...state, isLoading: true };
+  }
+
+  if (action.type === GET_PANEL_MEMBER_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_PANEL_MEMBER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      panelMembers: action.payload.panelMembers,
+      totalPanelMembers: action.payload.totalPanelMembers,
+      numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === SET_EDIT_PANEL_MEMBER) {
+    return {
+      ...state,
+      isEditing: true,
+      editMemberId: action.payload.id,
+    };
+  }
+
+  if (action.type === EDIT_PANEL_MEMBER_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === EDIT_PANEL_MEMBER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Status Updated!",
+    };
+  }
+
+  if (action.type === EDIT_PANEL_MEMBER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
   }
 
   throw new Error(`no such action : ${action.type}`);

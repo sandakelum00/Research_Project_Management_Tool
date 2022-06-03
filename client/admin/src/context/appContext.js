@@ -34,6 +34,12 @@ import {
   EDIT_STAFF_SUCCESS,
   EDIT_STAFF_ERROR,
   DELETE_STAFF_BEGIN,
+  GET_PANEL_MEMBER_BEGIN,
+  GET_PANEL_MEMBER_SUCCESS,
+  SET_EDIT_PANEL_MEMBER,
+  EDIT_PANEL_MEMBER_BEGIN,
+  EDIT_PANEL_MEMBER_SUCCESS,
+  EDIT_PANEL_MEMBER_ERROR,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -62,6 +68,10 @@ const initialState = {
   staffs: [],
   editStaffId: "",
   staffTypeOptions: ["supervisor", "co-supervisor"],
+  panelMembers: [],
+  panelTypeOptions: ["Pending", "Accept", "Reject"],
+  totalPanelMembers: 0,
+  editMemberId: "",
 };
 
 const AppContext = React.createContext();
@@ -397,6 +407,71 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  //get all panel members
+  const getAllPanelMembers = async () => {
+    const { search, searchStatus, searchType, sort } = state;
+
+    let url = `http://localhost:5000/api/v1/panel?status=${searchType}&sort=${sort}`;
+
+    if (search) {
+      url = url + `&search=${search}`;
+    }
+
+    dispatch({ type: GET_PANEL_MEMBER_BEGIN });
+
+    try {
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+
+      const { panelMembers, totalPanelMembers, numOfPages } = data;
+
+      dispatch({
+        type: GET_PANEL_MEMBER_SUCCESS,
+        payload: {
+          panelMembers,
+          totalPanelMembers,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutAdmin();
+    }
+    clearAlert();
+  };
+
+  //update panel member
+  const setEditPanelMember = (id) => {
+    dispatch({ type: SET_EDIT_PANEL_MEMBER, payload: { id } });
+  };
+
+  const editPanelMember = async (formData) => {
+    dispatch({ type: EDIT_PANEL_MEMBER_BEGIN });
+
+    try {
+      await axios.put(
+        `http://localhost:5000/api/v1/panel/${state.editMemberId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+
+      dispatch({ type: EDIT_PANEL_MEMBER_SUCCESS });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: EDIT_PANEL_MEMBER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
   //clear filter
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
@@ -439,6 +514,9 @@ const AppProvider = ({ children }) => {
         setEditStaff,
         deleteStaff,
         editStaff,
+        getAllPanelMembers,
+        editPanelMember,
+        setEditPanelMember,
       }}
     >
       {children}

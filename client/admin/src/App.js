@@ -11,6 +11,8 @@ import {
   EditDoc,
   Staffs,
   EditStaff,
+  PanelMembers,
+  EditPanelMember,
 } from "./pages/dashboard";
 
 function app() {
@@ -32,6 +34,8 @@ function app() {
           <Route path="edit-doc" element={<EditDoc />}></Route>
           <Route path="staff" element={<Staffs />}></Route>
           <Route path="edit-staff" element={<EditStaff />}></Route>
+          <Route path="panel-member" element={<PanelMembers />}></Route>
+          <Route path="edit-panel-member" element={<EditPanelMember />}></Route>
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Error />} />

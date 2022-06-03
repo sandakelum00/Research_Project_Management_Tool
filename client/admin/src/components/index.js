@@ -11,6 +11,8 @@ import SearchContainer from "./SearchContainer";
 import Loading from "./Loading";
 import StaffSearchContainer from "./StaffSearchContainer";
 import StaffContainer from "./StaffContainer";
+import PanelMembersContainer from "./PanelMembersContainer";
+import PanelMembersSearchContainer from "./PanelMembersSearchContainer";
 
 export {
   Logo,
@@ -26,4 +28,6 @@ export {
   Loading,
   StaffContainer,
   StaffSearchContainer,
+  PanelMembersContainer,
+  PanelMembersSearchContainer,
 };

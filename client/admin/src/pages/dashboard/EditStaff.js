@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 const EditStaff = () => {
   const {
-    // editDocument,
     isLoading,
     isEditing,
     showAlert,
@@ -19,7 +18,7 @@ const EditStaff = () => {
 
   useEffect(() => {
     if (!isEditing) {
-      navigate("/all-docs");
+      navigate("/staff");
     }
   }, [isEditing, navigate]);
 
