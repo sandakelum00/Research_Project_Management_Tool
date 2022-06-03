@@ -48,6 +48,8 @@ import {
   EDIT_STUDENT_ERROR,
   DELETE_STUDENT_BEGIN,
   CHANGE_PAGE,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -83,6 +85,8 @@ const initialState = {
   students: [],
   totalStudents: 0,
   editStudentId: "",
+  stats: {},
+  monthlyActivity: [],
 };
 
 const AppContext = React.createContext();
@@ -514,7 +518,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
-      // logoutAdmin();
+      logoutAdmin();
     }
     clearAlert();
   };
@@ -560,8 +564,36 @@ const AppProvider = ({ children }) => {
       });
       getAllStudents();
     } catch (error) {
-      // logoutAdmin();
+      logoutAdmin();
     }
+  };
+
+  //show stats
+  const showStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN });
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/v1/panel/stats",
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: {
+          stats: data.defaultStats,
+          monthlyActivity: data.monthlyActivity,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutUser()
+    }
+
+    clearAlert();
   };
 
   //clear filter
@@ -619,6 +651,7 @@ const AppProvider = ({ children }) => {
         editStudent,
         deleteStudent,
         changePage,
+        showStats,
       }}
     >
       {children}

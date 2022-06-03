@@ -15,6 +15,8 @@ import PanelMembersContainer from "./PanelMembersContainer";
 import PanelMembersSearchContainer from "./PanelMembersSearchContainer";
 import StudentSearchContainer from "./StudentSearchContainer";
 import StudentContainer from "./StudentContainer";
+import StatsContainer from "./StatsContainer";
+import ChartsContainer from "./ChartsContainer";
 
 export {
   Logo,
@@ -34,4 +36,6 @@ export {
   PanelMembersSearchContainer,
   StudentSearchContainer,
   StudentContainer,
+  StatsContainer,
+  ChartsContainer,
 };

@@ -1,5 +1,6 @@
 const PanelMember = require("../models/AllocatePanel");
 const { BadRequestError, NotFoundError } = require("../errors/index.js");
+const mongoose = require("mongoose");
 
 const getAllPanelMembers = async (req, res, next) => {
   try {
@@ -85,4 +86,26 @@ const updatePanelMember = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllPanelMembers, updatePanelMember };
+const showStats = async (req, res) => {
+  let stats = await PanelMember.aggregate([
+    { $group: { _id: "$status", count: { $sum: 1 } } },
+  ]);
+
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  const defaultStats = {
+    pending: stats.Pending || 0,
+    accept: stats.Accept || 0,
+    reject: stats.Reject || 0,
+  };
+
+  let monthlyActivity = [];
+
+  res.status(200).json({ defaultStats, monthlyActivity });
+};
+
+module.exports = { getAllPanelMembers, updatePanelMember, showStats };
