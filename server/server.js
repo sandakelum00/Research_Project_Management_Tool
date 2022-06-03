@@ -10,6 +10,7 @@ const adminAuthRoutes = require("./routes/adminAuthRoutes.js");
 const uploadDocRoutes = require("./routes/uploadDocRoutes.js");
 const staffManageRoutes = require("./routes/staffManageRouts.js");
 const panelRoutes = require("./routes/allocatePanelRoutes.js");
+const studentRoutes = require("./routes/studentsManageRouts.js");
 
 //import middleware
 const adminNotFoundMiddleware = require("./middleware/admin-not-found.js");
@@ -30,6 +31,7 @@ app.use("/api/v1/admin-auth", adminAuthRoutes);
 app.use("/api/v1/docs", authenticateAdmin, uploadDocRoutes);
 app.use("/api/v1/staff", authenticateAdmin, staffManageRoutes);
 app.use("/api/v1/panel", authenticateAdmin, panelRoutes);
+app.use("/api/v1/student", authenticateAdmin, studentRoutes);
 
 // middleware
 app.use(adminErrorHandlerMiddleware);
