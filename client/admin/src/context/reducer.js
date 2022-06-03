@@ -46,6 +46,7 @@ import {
   EDIT_STUDENT_SUCCESS,
   EDIT_STUDENT_ERROR,
   DELETE_STUDENT_BEGIN,
+  CHANGE_PAGE,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -418,6 +419,10 @@ const reducer = (state, action) => {
 
   if (action.type === DELETE_STUDENT_BEGIN) {
     return { ...state, isLoading: true };
+  }
+
+  if (action.type === CHANGE_PAGE) {
+    return { ...state, page: action.payload.page };
   }
 
   throw new Error(`no such action : ${action.type}`);

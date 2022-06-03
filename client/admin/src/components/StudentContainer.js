@@ -12,6 +12,7 @@ const StudentContainer = () => {
     students,
     isLoading,
     page,
+    numOfPages,
     totalStudents,
     search,
     searchStatus,
@@ -21,7 +22,7 @@ const StudentContainer = () => {
 
   useEffect(() => {
     getAllStudents();
-  }, [search, searchStatus, searchType, sort]);
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;
@@ -58,6 +59,8 @@ const StudentContainer = () => {
           </tbody>
         </Table>
       </div>
+
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };

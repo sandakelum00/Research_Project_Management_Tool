@@ -47,6 +47,7 @@ import {
   EDIT_STUDENT_SUCCESS,
   EDIT_STUDENT_ERROR,
   DELETE_STUDENT_BEGIN,
+  CHANGE_PAGE,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -219,9 +220,9 @@ const AppProvider = ({ children }) => {
 
   //get all documents
   const getAllDocuments = async () => {
-    const { search, searchStatus, searchType, sort } = state;
+    const { page, search, searchType, sort } = state;
 
-    let url = `http://localhost:5000/api/v1/docs?docType=${searchType}&sort=${sort}`;
+    let url = `http://localhost:5000/api/v1/docs?page=${page}&docType=${searchType}&sort=${sort}`;
 
     if (search) {
       url = url + `&search=${search}`;
@@ -338,9 +339,9 @@ const AppProvider = ({ children }) => {
 
   //get all staff
   const getAllStaff = async () => {
-    const { search, searchStatus, searchType, sort } = state;
+    const { search, page, searchType, sort } = state;
 
-    let url = `http://localhost:5000/api/v1/staff?userposition=${searchType}&sort=${sort}`;
+    let url = `http://localhost:5000/api/v1/staff?page=${page}&userposition=${searchType}&sort=${sort}`;
 
     if (search) {
       url = url + `&search=${search}`;
@@ -419,9 +420,9 @@ const AppProvider = ({ children }) => {
 
   //get all panel members
   const getAllPanelMembers = async () => {
-    const { search, searchStatus, searchType, sort } = state;
+    const { search, page, searchType, sort } = state;
 
-    let url = `http://localhost:5000/api/v1/panel?status=${searchType}&sort=${sort}`;
+    let url = `http://localhost:5000/api/v1/panel?page=${page}&status=${searchType}&sort=${sort}`;
 
     if (search) {
       url = url + `&search=${search}`;
@@ -484,9 +485,9 @@ const AppProvider = ({ children }) => {
 
   //get all students
   const getAllStudents = async () => {
-    const { search, sort } = state;
+    const { page, search, sort } = state;
 
-    let url = `http://localhost:5000/api/v1/student?sort=${sort}`;
+    let url = `http://localhost:5000/api/v1/student?page=${page}&sort=${sort}`;
 
     if (search) {
       url = url + `&search=${search}`;
@@ -584,6 +585,11 @@ const AppProvider = ({ children }) => {
     removeAdminFromLocalStorage();
   };
 
+  //change page
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -612,6 +618,7 @@ const AppProvider = ({ children }) => {
         setEditStudent,
         editStudent,
         deleteStudent,
+        changePage,
       }}
     >
       {children}

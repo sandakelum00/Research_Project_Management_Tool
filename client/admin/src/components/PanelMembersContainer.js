@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import Panel from "././PanelMember";
 import Wrapper from "../assets/wrappers/DocsContainer";
 import { Table } from "react-bootstrap";
-// import PageBtnContainer from "./PageBtnContainer";
+import PageBtnContainer from "./PageBtnContainer";
 
 const PanelMembersContainer = () => {
   const {
@@ -12,6 +12,7 @@ const PanelMembersContainer = () => {
     panelMembers,
     isLoading,
     page,
+    numOfPages,
     totalPanelMembers,
     search,
     searchStatus,
@@ -21,7 +22,7 @@ const PanelMembersContainer = () => {
 
   useEffect(() => {
     getAllPanelMembers();
-  }, [search, searchStatus, searchType, sort]);
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;
@@ -62,6 +63,8 @@ const PanelMembersContainer = () => {
           </tbody>
         </Table>
       </div>
+
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };

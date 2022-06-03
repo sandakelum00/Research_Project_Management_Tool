@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import Staff from "././Staff";
 import Wrapper from "../assets/wrappers/DocsContainer";
 import { Table } from "react-bootstrap";
-// import PageBtnContainer from "./PageBtnContainer";
+import PageBtnContainer from "./PageBtnContainer";
 
 const StaffContainer = () => {
   const {
@@ -12,6 +12,7 @@ const StaffContainer = () => {
     staffs,
     isLoading,
     page,
+    numOfPages,
     totalStaff,
     search,
     searchStatus,
@@ -21,7 +22,7 @@ const StaffContainer = () => {
 
   useEffect(() => {
     getAllStaff();
-  }, [search, searchStatus, searchType, sort]);
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;
@@ -62,6 +63,8 @@ const StaffContainer = () => {
           </tbody>
         </Table>
       </div>
+
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };

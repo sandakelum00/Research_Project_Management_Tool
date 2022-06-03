@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import Doc from "././Doc";
 import Wrapper from "../assets/wrappers/DocsContainer";
 import { Table } from "react-bootstrap";
-// import PageBtnContainer from "./PageBtnContainer";
+import PageBtnContainer from "./PageBtnContainer";
 
 const DocsContainer = () => {
   const {
@@ -12,6 +12,7 @@ const DocsContainer = () => {
     docs,
     isLoading,
     page,
+    numOfPages,
     totalDocs,
     search,
     searchStatus,
@@ -21,7 +22,7 @@ const DocsContainer = () => {
 
   useEffect(() => {
     getAllDocuments();
-  }, [search, searchStatus, searchType, sort]);
+  }, [page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;
@@ -60,6 +61,8 @@ const DocsContainer = () => {
           </tbody>
         </Table>
       </div>
+
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };
