@@ -20,13 +20,16 @@ const studentGroupRoutes = require("./routes/studentGroupRoute.js");
 const submissionRoute = require("./routes/groupSubmissionRoute.js");
 const DocRoutes = require("./routes/docUploadRoute.js");
 
-//student routs
+//staff routs
 // Import staff router
 const staffRoutes = require("./routes/staffRoutes.js");
 //Import marks router
 const markRoutes = require("./routes/marksRoutes.js");
 //Import topic accept router
 const topicRoutes = require("./routes/topicRoute");
+
+//panel member routs
+const postRoutes = require("./routes/posts.js");
 
 //import middleware
 const adminNotFoundMiddleware = require("./middleware/admin-not-found.js");
@@ -61,6 +64,9 @@ app.use(DocRoutes);
 app.use("/api/staff", staffRoutes);
 app.use("/api/marks", markRoutes);
 app.use("/api/topic", topicRoutes);
+
+//panel member
+app.use(postRoutes);
 
 // middleware
 app.use(adminErrorHandlerMiddleware);
