@@ -1,3 +1,4 @@
+//Marking model
 const mongoose = require("mongoose");
 
 const marksSchema = mongoose.Schema(
