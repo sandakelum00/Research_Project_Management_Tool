@@ -35,6 +35,8 @@ import {
   DELETE_STAFF_BEGIN,
   GET_PANEL_MEMBER_BEGIN,
   GET_PANEL_MEMBER_SUCCESS,
+  GET_USER_PANEL_BEGIN,
+  GET_USER_PANEL_SUCCESS,
   SET_EDIT_PANEL_MEMBER,
   EDIT_PANEL_MEMBER_BEGIN,
   EDIT_PANEL_MEMBER_SUCCESS,
@@ -332,6 +334,18 @@ const reducer = (state, action) => {
       panelMembers: action.payload.panelMembers,
       totalPanelMembers: action.payload.totalPanelMembers,
       numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === GET_USER_PANEL_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_USER_PANEL_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      panels: action.payload.panels,
     };
   }
 

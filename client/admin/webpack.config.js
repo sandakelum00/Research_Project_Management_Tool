@@ -5,7 +5,7 @@ module.exports = {
   entry: "./src/index.js",
 
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.join(__dirname, "/build"),
     filename: "index.js",
   },
 
@@ -24,7 +24,10 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: ["@babel/plugin-transform-runtime"],
+            plugins: [
+              "@babel/plugin-transform-runtime",
+              "babel-plugin-transform-import-meta",
+            ],
           },
         },
       },

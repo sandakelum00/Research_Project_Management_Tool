@@ -39,6 +39,11 @@ const PanelSchema = new mongoose.Schema(
       enum: ["Pending", "Accept", "Reject"],
       default: "Pending",
     },
+
+    panelMember: {
+      type: String,
+      default: "None",
+    },
   },
   { timestamps: true }
 );

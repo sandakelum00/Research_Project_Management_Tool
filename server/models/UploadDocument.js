@@ -14,7 +14,7 @@ const DocSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide title"],
       minlength: 3,
-      maxlength: 20,
+      maxlength: 50,
       trim: true,
     },
 

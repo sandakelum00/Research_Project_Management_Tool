@@ -1,6 +1,7 @@
 const PanelMember = require("../models/AllocatePanel");
 const { BadRequestError, NotFoundError } = require("../errors/index.js");
 const mongoose = require("mongoose");
+const moment = require("moment");
 
 const getAllPanelMembers = async (req, res, next) => {
   try {
@@ -57,16 +58,16 @@ const getAllPanelMembers = async (req, res, next) => {
 const updatePanelMember = async (req, res, next) => {
   try {
     const { id: memberId } = req.params;
-    const { status } = req.body;
+    const { status, panelMember } = req.body;
 
-    if (!status) {
+    if (!status || !panelMember) {
       const err = new BadRequestError("Please provide all values");
       next(err);
     }
 
-    const panelMember = await PanelMember.findOne({ _id: memberId });
+    const panelmember = await PanelMember.findOne({ _id: memberId });
 
-    if (!panelMember) {
+    if (!panelmember) {
       const err = new NotFoundError(`No panel with id :${memberId}`);
       next(err);
     }
@@ -103,7 +104,30 @@ const showStats = async (req, res) => {
     reject: stats.Reject || 0,
   };
 
-  let monthlyActivity = [];
+  let monthlyActivity = await PanelMember.aggregate([
+    {
+      $group: {
+        _id: { year: { $year: "$createdAt" }, month: { $month: "$createdAt" } },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { "_id.year": -1, "_id.month": -1 } },
+    { $limit: 6 },
+  ]);
+
+  monthlyActivity = monthlyActivity
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      const date = moment()
+        .month(month - 1)
+        .year(year)
+        .format("MMM Y");
+      return { date, count };
+    })
+    .reverse();
 
   res.status(200).json({ defaultStats, monthlyActivity });
 };

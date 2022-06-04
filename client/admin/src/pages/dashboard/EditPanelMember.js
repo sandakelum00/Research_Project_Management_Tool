@@ -14,11 +14,20 @@ const EditPanelMember = () => {
     editMemberId,
     editPanelMember,
     panelTypeOptions,
+    getAllUserPanelMembers,
+    panels,
   } = useAppContext();
+
+  useEffect(() => {
+    getAllUserPanelMembers();
+  }, []);
 
   const panel = panelMembers.find((panel) => panel._id === editMemberId);
 
   const [status, setStatus] = useState(isEditing && panel.status);
+  const [panelMember, setPanelMember] = useState(
+    isEditing && panel.panelMember
+  );
 
   const navigate = useNavigate();
 
@@ -31,19 +40,22 @@ const EditPanelMember = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!status) {
+    if (!status || !panelMember) {
       displayAlert();
       return;
     }
 
     editPanelMember({
       status,
+      panelMember,
     });
 
     setTimeout(() => {
       navigate("/panel-member");
     }, 3000);
   };
+
+  const pnl = ["None"];
 
   return (
     <Wrapper>
@@ -82,13 +94,31 @@ const EditPanelMember = () => {
 
           {/* Status */}
           <FormRowSelect
-            name="status"
+            name="topic status"
             value={status}
             handleChange={(e) => setStatus(e.target.value)}
             list={panelTypeOptions}
           />
 
-          <button className="btn btn-block" type="submit" disabled={isLoading}>
+          {panels.map((panel) => {
+            pnl.push(panel.userName);
+          })}
+
+          {/* panel member */}
+          <FormRowSelect
+            labelText="Panel Member"
+            name="panelMember"
+            value={panelMember}
+            handleChange={(e) => setPanelMember(e.target.value)}
+            list={pnl}
+          />
+
+          <button
+            style={{ marginTop: "10px" }}
+            className="btn btn-block"
+            type="submit"
+            disabled={isLoading}
+          >
             {isLoading ? "Please Wait..." : "save changes"}
           </button>
         </div>

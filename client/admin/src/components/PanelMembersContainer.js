@@ -50,7 +50,8 @@ const PanelMembersContainer = () => {
               <th>Research Title</th>
               <th>Supervisor</th>
               <th>Co-Supervisor</th>
-              <th>Allocate Status</th>
+              <th>Topic Status</th>
+              <th>Panel Member</th>
               <th>Requested Date</th>
               <th>Updated Date</th>
               <th>Actions</th>

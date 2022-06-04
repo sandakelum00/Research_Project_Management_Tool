@@ -36,6 +36,8 @@ import {
   DELETE_STAFF_BEGIN,
   GET_PANEL_MEMBER_BEGIN,
   GET_PANEL_MEMBER_SUCCESS,
+  GET_USER_PANEL_BEGIN,
+  GET_USER_PANEL_SUCCESS,
   SET_EDIT_PANEL_MEMBER,
   EDIT_PANEL_MEMBER_BEGIN,
   EDIT_PANEL_MEMBER_SUCCESS,
@@ -82,6 +84,7 @@ const initialState = {
   panelTypeOptions: ["Pending", "Accept", "Reject"],
   totalPanelMembers: 0,
   editMemberId: "",
+  panels: [],
   students: [],
   totalStudents: 0,
   editStudentId: "",
@@ -487,6 +490,35 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  //get all user panel members
+  const getAllUserPanelMembers = async () => {
+    dispatch({ type: GET_USER_PANEL_BEGIN });
+
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/v1/panel-members",
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+
+      const { panels } = data;
+
+      dispatch({
+        type: GET_USER_PANEL_SUCCESS,
+        payload: {
+          panels,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutAdmin();
+    }
+    clearAlert();
+  };
+
   //get all students
   const getAllStudents = async () => {
     const { page, search, sort } = state;
@@ -644,6 +676,7 @@ const AppProvider = ({ children }) => {
         deleteStaff,
         editStaff,
         getAllPanelMembers,
+        getAllUserPanelMembers,
         editPanelMember,
         setEditPanelMember,
         getAllStudents,

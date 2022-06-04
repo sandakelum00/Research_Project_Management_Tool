@@ -10,6 +10,7 @@ const PanelMember = ({
   supervisor,
   cosupervisor,
   status,
+  panelMember,
   createdAt,
   updatedAt,
 }) => {
@@ -28,6 +29,7 @@ const PanelMember = ({
         <td>{supervisor}</td>
         <td>{cosupervisor}</td>
         <td className={`status ${status}`}>{status}</td>
+        <td>{panelMember}</td>
         <td>{createdDate}</td>
         <td>{updatedDate}</td>
         <td className="actions">
@@ -36,7 +38,7 @@ const PanelMember = ({
             className="btn edit-btn"
             onClick={() => setEditPanelMember(_id)}
           >
-            Change Status
+            Allocate Member
           </Link>
         </td>
       </tr>
