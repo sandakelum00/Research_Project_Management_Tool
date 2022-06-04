@@ -14,6 +14,7 @@ import {
 } from "../Constants/markConstants";
 import axios from "axios";
 
+//Get the marks
 export const listMarksAction = () => async (dispatch, getState) => {
   try {
     dispatch({
