@@ -51,7 +51,7 @@ const MySubmissions = (history) => {
         </Col>
         <Col>
         <h2 style={{color:"blue", marginLeft:"-200px", marginBottom:"50px", marginTop:"50px"}}>Submission Details</h2>
-        <h4>*Read carefully before delete records</h4>
+        <h4 style={{ marginLeft:"-200px", marginBottom:"50px", marginTop:"50px"}}>*Read carefully before delete records</h4>
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {errorDelete && (
           <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
