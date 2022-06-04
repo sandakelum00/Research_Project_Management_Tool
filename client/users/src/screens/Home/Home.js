@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Col, Row, Card, Button } from "react-bootstrap";
@@ -45,6 +45,8 @@ const Home = (history) => {
                 <li>Start the research project.</li>
               </ul>
               <div className="cards">
+                <Row>
+                  <Col>
                 {
                   <>
                     {["Light"].map((variant) => (
@@ -57,19 +59,53 @@ const Home = (history) => {
                         style={{ width: "18rem" }}
                         className="mb-2"
                       >
-                        <Card.Header>Sample Templates</Card.Header>
+                        <Card.Header>No idea where to begin?</Card.Header>
                         <Card.Body>
-                          <Card.Title>{variant} Card Title </Card.Title>
+                          <Card.Title>Check this sample templates </Card.Title>
                           <Card.Text>
-                            No idea how to start? Try the sample templates.
                             <br />
+                            <Link to="/docList">
                             <Button>Templates</Button>
+                            </Link>
                           </Card.Text>
                         </Card.Body>
                       </Card>
+                      
                     ))}
                   </>
                 }
+                </Col>
+                <Col>
+                
+                {
+                  <>
+                    {["Light"].map((variant) => (
+                      <Card
+                        bg={variant.toLowerCase()}
+                        key={variant}
+                        text={
+                          variant.toLowerCase() === "light" ? "dark" : "white"
+                        }
+                        style={{ width: "18rem" }}
+                        className="mb-2"
+                      >
+                        <Card.Header>Check Submissions</Card.Header>
+                        <Card.Body>
+                          <Card.Title>Pending result will be update soon </Card.Title>
+                          <Card.Text>
+                            <br />
+                            <Link to="/submissions">
+                            <Button>Submissions</Button>
+                            </Link>
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                      
+                    ))}
+                  </>
+                }
+                </Col>
+                </Row>
               </div>
             </div>
           </Col>

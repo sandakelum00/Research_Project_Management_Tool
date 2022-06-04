@@ -15,6 +15,7 @@ import CreateSubmission from "./screens/Submission/createSubmission";
 import MySubmissions from "./screens/Submission/submissionList";
 import UploadFile from './screens/DocumentSubmission/uploadFile';
 import FilesList from "./screens/DocumentSubmission/FilesList";
+import Chat from "./screens/Chat/chat";
 
 const App = () => (
   <BrowserRouter>
@@ -32,6 +33,7 @@ const App = () => (
         <Route path="/submissions" element={<MySubmissions />}></Route>
         <Route path="/upload" element={<UploadFile />}></Route>
         <Route path="/docList" element={<FilesList />}></Route>
+        <Route path="/chat" element={<Chat />}></Route>
       </Routes>
     <Footer/>
   </BrowserRouter>

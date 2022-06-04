@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const UploadFile = (props) => {
   const [file, setFile] = useState(null); // state for storing actual image
@@ -74,10 +75,21 @@ const UploadFile = (props) => {
 
   return (
     <React.Fragment>
+      <div style={{marginTop:"100px", marginLeft:"100px", marginRight:"100px"}}>
+      <h1 >Submit your Research paper here.</h1><br/>
+      <h2>Before Submission</h2>
+      <ul>
+        <li>Check Student and supervisor details again</li>
+        <li>Do not upload files larger than 10mb</li>
+        <li>If file size is larger than 10mb upload to a cloud drive and submit the link</li>
+      </ul>
+      </div>
+      <div style={{marginTop:"100px", marginLeft:"100px", marginRight:"100px"}}>
       <Form className="search-form" onSubmit={handleOnSubmit}>
         {errorMsg && <p className="errorMsg">{errorMsg}</p>}
         <Row>
           <Col>
+          
             <Form.Group controlId="title">
               <Form.Control
                 type="text"
@@ -111,7 +123,7 @@ const UploadFile = (props) => {
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps({ className: 'drop-zone' })} ref={dropRef}>
                 <input {...getInputProps()} />
-                <p>Drag and drop a file OR click here to select a file</p>
+                <p style={{color:"blue", cursor:"pointer", marginTop:"30px"}}>Drag and drop a file OR click here to select a file</p>
                 {file && (
                   <div>
                     <strong>Selected file:</strong> {file.name}
@@ -135,10 +147,13 @@ const UploadFile = (props) => {
             </div>
           )}
         </div>
+        <Link to="/">
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        </Link>
       </Form>
+      </div>
     </React.Fragment>
   );
 };

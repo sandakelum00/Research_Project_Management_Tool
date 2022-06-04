@@ -12,9 +12,9 @@ import "./Sidebar.css"
 const Sidebar = () => {
   return (
     <div
-      style={{ display: 'flex', height: '100%', overflow: 'scroll initial' }}
+      style={{ display: '#fff', height: '100%', overflow: 'scroll initial' }}
     >
-      <CDBSidebar textColor="#fff" bg="primary"  variant="dark"  >
+      <CDBSidebar textColor="white" bg="primary"  variant="dark"  >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
             href="/"
@@ -33,11 +33,14 @@ const Sidebar = () => {
             <NavLink exact to="/team" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="users" iconSize="2x" style={{ marginTop:"50px", marginRight:"40px" }}>&emsp;&nbsp;Teams</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            <NavLink exact to="/docList" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="download" iconSize="2x" style={{ marginTop:"50px", marginRight:"40px" }}>&emsp;&nbsp;Downloads</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/upload" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="folder" iconSize="2x" style={{ marginTop:"50px", marginRight:"40px" }}>&emsp;&nbsp;Document</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/chat" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="sms" iconSize="2x" style={{ marginTop:"50px", marginRight:"40px" }}>&emsp;&nbsp;Chat</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>  

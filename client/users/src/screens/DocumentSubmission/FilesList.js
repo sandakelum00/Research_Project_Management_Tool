@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import download from 'downloadjs';
 import axios from 'axios';
-import { Table } from "react-bootstrap";
+import { Col, Table, Row } from "react-bootstrap";
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 const FilesList = () => {
   const [filesList, setFilesList] = useState([]);
@@ -40,9 +41,17 @@ const FilesList = () => {
   };
 
   return (
-    <div className="files-container">
+    <div>
+    <Row>
+      <Col>
+      <Sidebar/>
+      </Col>
+    
+   <Col>
+    <div className="files-container" >
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
-      <div className='details'>
+      <h3 style={{marginTop:"80px", marginLeft:"-240px"}}>Download Sample Templates</h3>
+      <div className='details' style={{marginTop:"70px", marginRight:"150px"}} >
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -82,6 +91,10 @@ const FilesList = () => {
       </Table>
       </div>
     </div>
+    </Col>
+    </Row>
+    </div>
+   
   );
 };
 
