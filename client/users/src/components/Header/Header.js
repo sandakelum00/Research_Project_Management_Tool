@@ -32,7 +32,7 @@ const Header = () => {
           {userInfo ? (
             <Nav className="ml-auto">
               <Nav.Link style={{ marginLeft: "850px", marginBottom: "10px" }} href="/homeStudent">Dashboard</Nav.Link>
-              <NavDropdown title={userInfo?.fullName} id="basic-nav-dropdown">
+              <NavDropdown title={userInfo?.fullName} id="basic-nav-dropdown" style={{ marginLeft: "70px"}}>
                 <NavDropdown.Item href="profileStudent">My Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/" onClick={logoutHandler}>

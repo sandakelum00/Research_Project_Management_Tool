@@ -51,7 +51,7 @@ const Team = (history) => {
               </Link>
               </div>
               <div>
-              <Link to="/createTeam">
+              <Link to="/submitGroup">
                 <Button
                 style={{ marginTop: "50px", marginLeft:"-8px"}}
                   type="submit"
@@ -63,7 +63,7 @@ const Team = (history) => {
               </Link>
               </div>
               <div>
-              <Link to="/createTeam">
+              <Link to="/submissions">
                 <Button
                 style={{ marginTop: "50px", marginLeft:"-5px" }}
                   type="submit"

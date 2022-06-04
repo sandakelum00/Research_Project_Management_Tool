@@ -2,12 +2,6 @@ import {
   GROUP_CREATE_FAIL,
   GROUP_CREATE_REQUEST,
   GROUP_CREATE_SUCCESS,
-  GROUP_LIST_FAIL,
-  GROUP_LIST_REQUEST,
-  GROUP_LIST_SUCCESS,
-  GROUP_UPDATE_FAIL,
-  GROUP_UPDATE_REQUEST,
-  GROUP_UPDATE_SUCCESS,
 } from "../constants/groupConstants";
 
 // export const groupListReducer = (state = { groups: [] }, action) => {

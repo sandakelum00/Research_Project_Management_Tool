@@ -5,11 +5,16 @@ import { studentRegisterReducer } from "./reducers/studentReducer";
 import { studentLoginReducer } from "./reducers/studentReducer"
 import { studentUpdateReducer } from "./reducers/studentReducer";
 import { groupCreateReducer } from "./reducers/groupReducer";
+import { submissionCreateReducer, submissionDeleteReducer, submissionListReducer } from "./reducers/submissionReducer";
+
 const reducer = combineReducers({
   studentRegister: studentRegisterReducer,
   studentLogin: studentLoginReducer,
   studentUpdate: studentUpdateReducer,
   groupCreate: groupCreateReducer,
+  submissionList: submissionListReducer,
+  submissionCreate: submissionCreateReducer,
+  submissionDelete: submissionDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

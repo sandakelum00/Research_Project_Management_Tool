@@ -11,6 +11,10 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Profile from "./screens/Profile/studentProfile"
 import Team from "./screens/Teams/team";
 import CreateTeam from "./screens/Teams/createTeam";
+import CreateSubmission from "./screens/Submission/createSubmission";
+import MySubmissions from "./screens/Submission/submissionList";
+import UploadFile from './screens/DocumentSubmission/uploadFile';
+import FilesList from "./screens/DocumentSubmission/FilesList";
 
 const App = () => (
   <BrowserRouter>
@@ -24,6 +28,10 @@ const App = () => (
         <Route path="/profileStudent" element={<Profile />}></Route>
         <Route path="/team" element={<Team />}></Route>
         <Route path="/createTeam" element={<CreateTeam />}></Route>
+        <Route path="/submitGroup" element={<CreateSubmission />}></Route>
+        <Route path="/submissions" element={<MySubmissions />}></Route>
+        <Route path="/upload" element={<UploadFile />}></Route>
+        <Route path="/docList" element={<FilesList />}></Route>
       </Routes>
     <Footer/>
   </BrowserRouter>

@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const groupSubmissionSchema = mongoose.Schema(
   {
+    LeaderNo: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -10,17 +14,18 @@ const groupSubmissionSchema = mongoose.Schema(
     supervisor: {
       type: String,
       required: true,
-      unique: true,
     },
     cosupervisor: {
       type: String,
       required: true,
-      unique: true,
     },
     status: {
-      type: String,
-      required: true,
+      type: String, 
       default : 'Pending'
+    },
+    panelMember: {
+      type: String, 
+      default : 'None'
     },
     student: {
       type: mongoose.Schema.Types.ObjectId,
@@ -29,7 +34,7 @@ const groupSubmissionSchema = mongoose.Schema(
     },
   },
   {
-    timeStamps: true,
+    timestamps: true,
   }
 );
 
