@@ -16,6 +16,9 @@ import MarkList from "./Screeners/MarkList/MarkList";
 import SingleMark from "./Screeners/SingleMark/SingleMark";
 import SingleTopic from "./Screeners/SingleTopic/SingleTopic";
 import Profile from "./Screeners/ProfilePage/Profile";
+import Footer from "./Footer/Footer";
+import UploadFile from "./Screeners/DocumentSubmission/uploadFile";
+import FilesList from "./Screeners/DocumentSubmission/FilesList";
 const App = () => (
   <BrowserRouter>
     <Header />
@@ -36,8 +39,11 @@ const App = () => (
         <Route path="/singlemark/:id" element={<SingleMark />} />
         <Route path="/singletopic/:id" element={<SingleTopic />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/upload" element={<UploadFile />}></Route>
+        <Route path="/docList" element={<FilesList />}></Route>
       </Routes>
     </main>
+    <Footer />
   </BrowserRouter>
 );
 

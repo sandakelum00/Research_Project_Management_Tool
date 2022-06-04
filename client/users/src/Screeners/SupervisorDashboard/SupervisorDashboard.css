@@ -1,4 +1,14 @@
 .button{
     margin-bottom: 20px;
     margin-right: 100px;
+    width: 50%;
+  }
+
+  .home{
+    margin-right: 100px;
+     margin-right: 150px;
+  }
+
+    .home1{
+      font-size: 40px;
   }

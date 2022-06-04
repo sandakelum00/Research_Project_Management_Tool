@@ -1,13 +1,14 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { Button,Table } from "react-bootstrap";
-import MainScreen from "../MainPage/MainScreen";
+import { Button,Table,Row,Col } from "react-bootstrap";
+// import MainScreen from "../MainPage/MainScreen";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Components/Loading";
 import ErrorMessage from "../../Components/ErrorMessage";
 import {deleteMarkAction,listMarksAction} from "../../Actions/markAction"
 import "./MarkList.css";
+import Sidebar from '../../Components/Sidebar';
 
 const MarkList = (history) => {
      const dispatch = useDispatch();
@@ -55,55 +56,61 @@ const MarkList = (history) => {
      ]);
 
   return (
-    <MainScreen title="Mark List">
-      <Link to="/marks">
-        <Button className="button">Add Marks</Button>
-      </Link>
-
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-      {errorDelete && (
-        <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-      )}
-      {loading && <Loading />}
-      {loadingDelete && <Loading />}
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Group Id</th>
-            <th>Marks</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {marks?.map((singlemarks) => (
-            <tr key={singlemarks._id}>
-              <td>{singlemarks.year}</td>
-              <td>{singlemarks.groupid}</td>
-              <td>{singlemarks.mark}</td>
-
-              <td>
-                <Link to={`/singlemark/${singlemarks._id}`}>
-                  <Button
-                    variant="success"
-                    className="mx-2"
-                  >
-                    Update Mark
-                  </Button>
-                </Link>
-                <Button
-                  variant="danger"
-                  className="mx-2"
-                  onClick={() => deleteHandler(singlemarks._id)}
-                >
-                  Delete Task
-                </Button>
-              </td>
+    <Row>
+      <Col>
+        <Sidebar />
+      </Col>
+      <Col md={8} className="home">
+        <br></br>
+        <Link to="/marks">
+          <Button>Add Marks</Button>
+        </Link>
+        <br></br>
+        <br></br>
+        <h1 className="home1">Evaluation Marks</h1>
+        <hr></hr>
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {errorDelete && (
+          <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+        )}
+        {loading && <Loading />}
+        {loadingDelete && <Loading />}
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Group Id</th>
+              <th>Marks</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </MainScreen>
+          </thead>
+          <tbody>
+            {marks?.map((singlemarks) => (
+              <tr key={singlemarks._id}>
+                <td>{singlemarks.year}</td>
+                <td>{singlemarks.groupid}</td>
+                <td>{singlemarks.mark}</td>
+
+                <td>
+                  <Link to={`/singlemark/${singlemarks._id}`}>
+                    <Button variant="success" className="mx-2">
+                      Update Mark
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="danger"
+                    className="mx-2"
+                    onClick={() => deleteHandler(singlemarks._id)}
+                  >
+                    Delete Task
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Col>
+    </Row>
   );
   
  

@@ -1,15 +1,10 @@
 import React, { useEffect } from "react";
 import {
-  Accordion,
-  Badge,
   Button,
-  Card,
-  Nav,
-  Navbar,
- Container,
-  NavDropdown,
+  Row,
+  Col,
 } from "react-bootstrap";
-import MainScreen from "../MainPage/MainScreen";
+// import MainScreen from "../MainPage/MainScreen";
 import { Link, useNavigate } from "react-router-dom";
 import {  useSelector } from "react-redux";
 import "./SupervisorDashboard.css";
@@ -30,28 +25,42 @@ const SupervisorDashboard = (history) => {
     }
   },[history,staffInfo])
   return (
-    <div>
-      <br></br>
-      <MainScreen title={`Welcome ${staffInfo.username}....`}>
-        <div>
+    <Row>
+      <Col>
+        <Sidebar />
+      </Col>
+      <Col md={8} className="home">
+        <br></br>
+        <div style={{ justifyContent: "center" }}>
+          <h1 className="home1">{`Welcome ${staffInfo.username}....`}</h1>
+          <hr></hr>
           <h4 className="subtitle">Supervisor/Co-Supervisor Dashboard</h4>
           <br></br>
+          <h5>
+            This is the official page for the insturs to do all processes
+            regarding studetnt researchers
+          </h5>
+
           <br></br>
-          <Sidebar/>
+          <h5>Accept the research topics</h5>
           <Link to="/topicacceptance">
             <Button className="button">Topic Acceptance</Button>
           </Link>
 
+          <br></br>
+          <h5>Chat with the student groups</h5>
           <Link to="/chatwithgroups">
             <Button className="button">Chat with the groups</Button>
           </Link>
 
+          <br></br>
+          <h5>Evalute the projects</h5>
           <Link to="/evaluation">
             <Button className="button">Evaluations</Button>
           </Link>
         </div>
-      </MainScreen>
-    </div>
+      </Col>
+    </Row>
   );
 }
 
