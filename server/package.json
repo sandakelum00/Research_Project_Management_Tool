@@ -14,9 +14,13 @@
     "multer": "^1.4.4-lts.1",
     "validator": "^13.7.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "supertest": "^6.2.3"
+  },
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "test": "jest --watchAll ----verbose"
   },
   "repository": {
     "type": "git",
