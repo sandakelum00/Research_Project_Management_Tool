@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "proxy": "http://127.0.0.1:5000/",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot ",
     "build": "webpack --mode production"
@@ -22,9 +23,35 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "cdbreact": "^1.0.0",
     "css-loader": "^6.7.1",
+    "downloadjs": "^1.4.7",
+    "moment": "^2.29.3",
     "react": "^18.1.0",
+    "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
-    "style-loader": "^3.3.1"
+    "react-dropzone": "^14.2.1",
+    "react-markdown": "^8.0.3",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "style-loader": "^3.3.1",
+    "web-vitals": "^2.1.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
