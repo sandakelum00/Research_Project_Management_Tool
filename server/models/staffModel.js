@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-
-const staffSchema = new mongoose.Schema(
+const staffSchema = mongoose.Schema(
   {
     username: {
       type: String,
@@ -52,24 +50,25 @@ const staffSchema = new mongoose.Schema(
       trim: true,
     },
   },
-  { timestamps: true }
+
+  {
+    timestamps: true,
+  }
 );
 
-staffSchema.pre("save", async function () {
-  if (!this.isModified("password")) return;
+staffSchema.pre("save", async function (next) {
+  if (!this.isModified("userpassword")) {
+    next();
+  }
+
   const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  this.userpassword = await bcrypt.hash(this.userpassword, salt);
 });
 
-staffSchema.methods.createJWT = function () {
-  return jwt.sign({ adminId: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_LIFETIME,
-  });
+staffSchema.methods.matchThePasswords = async function (enteredUserPassword) {
+  return await bcrypt.compare(enteredUserPassword, this.userpassword);
 };
 
-staffSchema.methods.comparePassword = async function (candidatePassword) {
-  const isMatch = await bcrypt.compare(candidatePassword, this.password);
-  return isMatch;
-};
+const StaffModel = mongoose.model("Staff", staffSchema);
 
-module.exports = mongoose.model("Staff", staffSchema);
+module.exports = StaffModel;

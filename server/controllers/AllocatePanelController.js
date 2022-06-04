@@ -1,4 +1,4 @@
-const PanelMember = require("../models/AllocatePanel");
+const PanelMember = require("../models/groupSubmission");
 const { BadRequestError, NotFoundError } = require("../errors/index.js");
 const mongoose = require("mongoose");
 const moment = require("moment");
